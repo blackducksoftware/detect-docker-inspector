@@ -33,7 +33,7 @@ public class HelpReaderTest {
 
         String helpFileContents = helpReader.getVariableSubstitutedTextFromHelpFile("overview");
 
-        assertTrue(helpFileContents.contains("Black Duck Docker Inspector is invoked by Synopsys Detect on a Docker image"));
+        assertTrue(helpFileContents.contains("Detect Docker Inspector is invoked by Synopsys Detect"));
         assertTrue(helpFileContents.contains(TEST_PROGRAM_VERSION));
     }
 
