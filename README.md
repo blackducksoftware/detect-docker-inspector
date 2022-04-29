@@ -1,6 +1,7 @@
 ## Overview ##
 
-Black Duck Docker Inspector is a Synopsys Detect inspector that enables Synopsys Detect to analyze your docker images without running them.
+Detect Docker Inspector is a Synopsys Detect inspector that enables Synopsys Detect to analyze your docker images without running them.
+Detect Docker Inspector is invoked by running Synopsys Detect.
 
 Information on using Synopsys Detect can be found [here](https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=introduction.html)
 
