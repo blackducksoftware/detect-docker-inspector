@@ -1,10 +1,11 @@
 
 _Help version: ${program_version}_
 
-${solution_name} is invoked by ${detect_product_name} on a Docker image to:
+${solution_name} is invoked by ${detect_product_name} when ${detect_product_name} is given a Docker image to scan.
+${solution_name} will:.
 
-1. Discover packages (components) installed in a Linux image by the Linuix package manager.
-2. Provide to ${detect_product_name}, for any image, potentially useful targets for  signature and binary scanning.
+1. Discover packages (components) installed in a given Linux image by analyzing the contents of the Linux package manager database.
+2. Provide to ${detect_product_name}, for any image, potentially useful targets (file archives) for signature and binary scanning.
 
 ${solution_name} does not run the target image, so it is safe to run it on untrusted images.
 

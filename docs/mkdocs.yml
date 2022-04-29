@@ -9,7 +9,7 @@
 # To view the docs, you must execute:
 #   At project root: gradlew docs
 #   At docs/site: mkdocs serve
-site_name: Black Duck Docker Inspector
+site_name: Detect Docker Inspector
 theme:
   name: 'material'
 docs_dir: 'generated'

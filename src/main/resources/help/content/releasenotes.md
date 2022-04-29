@@ -1,3 +1,13 @@
+#### Version 10.0.0
+
+##### Changed features
+
+* Changed name from Black Duck Docker Inspector to Detect Docker Inspector.
+
+##### Removed features
+
+* Dropped support for running Docker Inspector as a standalone utility (executing either blackduck-docker-inspector.sh or the .jar). Detect Docker Inspector must now be invoked by running Synopsys Detect.
+
 #### Version 9.4.3
 
 ##### Dependency update
@@ -20,39 +30,39 @@
 
 ##### New features
 
-* Enhanced ${solution_name} to provide information on relationships between linux package manager components (ie. discern direct from transitive dependencies).
+* Enhanced Black Duck Docker Inspector to provide information on relationships between linux package manager components (ie. discern direct from transitive dependencies).
 
 ##### Changed features
 
-* Deprecated properties associated with connection to Black Duck. This is a consequence of the transition away from supporting the use of ${solution_name} as a standalone utility (as supposed to scanning via Detect).
+* Deprecated properties associated with connection to Black Duck. This is a consequence of the transition away from supporting the use of Black Duck Docker Inspector as a standalone utility (as supposed to scanning via Detect).
 
 #### Version 9.3.1
 
 ##### Resolved issue
-* (IDETECT-2942) Resolved issue that caused ${solution_name} to try to read the body of a bad response from image inspector services without checking the response's status code to make sure it was a successful request. ${solution_name} now throws an exception if it receives a bad response.
+* (IDETECT-2942) Resolved issue that caused Black Duck Docker Inspector to try to read the body of a bad response from image inspector services without checking the response's status code to make sure it was a successful request. Black Duck Docker Inspector now throws an exception if it receives a bad response.
 
 #### Version 9.3.0
 
 ##### New feature
-* Added support for Open Container Initiative (OCI) images provided to ${solution_name} using the *docker.tar* property.
+* Added support for Open Container Initiative (OCI) images provided to Black Duck Docker Inspector using the *docker.tar* property.
 
 ##### Resolved issue
-* (IDOCKER-742) Resolved an issue that caused ${solution_name} to fail to find the target image (requested using the *docker.image.repo* property) in a multi-image .tar file when the *docker.image.repo* value includes the registry prefix (e.g. "docker.io/").
+* (IDOCKER-742) Resolved an issue that caused Black Duck Docker Inspector to fail to find the target image (requested using the *docker.image.repo* property) in a multi-image .tar file when the *docker.image.repo* value includes the registry prefix (e.g. "docker.io/").
 
 #### Version 9.2.3
 
 ##### Resolved issue
-* (IDOCKER-736) Resolved an issue that could cause ${solution_name} to use the wrong component namespace in BDIO, resulting in an empty BOM, for Oracle Linux images.
+* (IDOCKER-736) Resolved an issue that could cause Black Duck Docker Inspector to use the wrong component namespace in BDIO, resulting in an empty BOM, for Oracle Linux images.
 
 #### Version 9.2.2
 
 ##### Resolved issue
-* (IDOCKER-722) Resolved an issue that caused ${solution_name} to, when it found a "white out opaque directory" file, to delete files added by the current layer as supposed to only deleting files added by lower layers. 
+* (IDOCKER-722) Resolved an issue that caused Black Duck Docker Inspector to, when it found a "white out opaque directory" file, to delete files added by the current layer as supposed to only deleting files added by lower layers. 
 
 #### Version 9.2.1
 
 ##### Resolved issue
-* (IDOCKER-727) Resolved an issue that caused ${solution_name} to fail to discover packages in CentOS 7 based images due to an error upgrading the rpm database.
+* (IDOCKER-727) Resolved an issue that caused Black Duck Docker Inspector to fail to discover packages in CentOS 7 based images due to an error upgrading the rpm database.
 
 #### Version 9.2.0
 
@@ -60,19 +70,19 @@
 * Added the ability to pull and inspect a specified platform of a multi-platform image using the new docker.image.platform property.
 
 ##### Changed features
-* Added support for running ${solution_name} using Java 15
+* Added support for running Black Duck Docker Inspector using Java 15
 
 ##### Resolved issue
-* (IDOCKER-715) Resolved an issue that could cause ${solution_name} to fail on Windows during a docker pull operation with the message "java.lang.NoSuchMethodError: com.sun.jna.Native.load(Ljava/lang/String;Ljava/lang/Class;Ljava/util/Map;)Lcom/sun/jna/Library;".
-* (IDOCKER-716) Resolved an issue that caused ${solution_name} to discover no packages on fedora:33 and fedora:34 based images.
+* (IDOCKER-715) Resolved an issue that could cause Black Duck Docker Inspector to fail on Windows during a docker pull operation with the message "java.lang.NoSuchMethodError: com.sun.jna.Native.load(Ljava/lang/String;Ljava/lang/Class;Ljava/util/Map;)Lcom/sun/jna/Library;".
+* (IDOCKER-716) Resolved an issue that caused Black Duck Docker Inspector to discover no packages on fedora:33 and fedora:34 based images.
 
 #### Version 9.1.1
 ##### Resolved issue
-* (IDOCKER-710) Resolved an issue that could cause ${solution_name} to fail when the target image file system contains circular symbolic links.
+* (IDOCKER-710) Resolved an issue that could cause Black Duck Docker Inspector to fail when the target image file system contains circular symbolic links.
 
 #### Version 9.1.0
 ##### New features
-* Added support for running on Windows 10 Enterprise Edition by executing the ${solution_name} .jar file directly.
+* Added support for running on Windows 10 Enterprise Edition by executing the Black Duck Docker Inspector .jar file directly.
 * Added property use.platform.default.docker.host (default to true).
 * Added property imageinspector.service.log.length (defaults to 10000 lines). This gives the user control over the
 number of lines of the imageinspector service log that are included in the Detect log
@@ -82,15 +92,15 @@ when logging level is set to DEBUG or higher.
 * Changed default working directory from /tmp to $HOME/blackduck/docker-inspector
 
 ##### Resolved issue
-* (IDOCKER-709) Resolved an issue that could cause ${solution_name} to fail because it ran out of memory while writing the image inspector log to the ${solution_name} log.
+* (IDOCKER-709) Resolved an issue that could cause Black Duck Docker Inspector to fail because it ran out of memory while writing the image inspector log to the Black Duck Docker Inspector log.
 
 #### Version 9.0.2
 ##### Resolved issues
-* (IDOCKER-706) Resolved an issue that could cause ${solution_name} to fail when using existing image inspector services when given a target docker .tar file that resided outside the directory shared with the image inspector container(s).
+* (IDOCKER-706) Resolved an issue that could cause Black Duck Docker Inspector to fail when using existing image inspector services when given a target docker .tar file that resided outside the directory shared with the image inspector container(s).
 
 #### Version 9.0.1
 ##### Resolved issues
-* Resolved an issue that could cause files to be omitted from the squashed image produced by ${solution_name}. The problem occurred on images that declared a directory opaque and added files to that directory within the same layer that declared it opaque.
+* Resolved an issue that could cause files to be omitted from the squashed image produced by Black Duck Docker Inspector. The problem occurred on images that declared a directory opaque and added files to that directory within the same layer that declared it opaque.
 
 #### Version 9.0.0
 ##### Changed feature

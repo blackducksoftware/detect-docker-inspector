@@ -12,6 +12,7 @@ Most, but not all, of the following deployment examples use the toolkit approach
 The deployment samples provided are intended to illustrate possible approaches to the challenges
 involved in deploying ${solution_name}. They are not intended to be used as-is in production.
 You should understand the code before you use it. They do not represent the only way to deploy in each environment.
+At a minimum, before using a sample, you should update it to the latest versions of the software it uses.
 
 Your deployment approach is the same whether you are invoking ${solution_name} directly, or invoking it using ${detect_product_name}.
 Most of the sample deployments use ${detect_product_name} simply because that is the most common use case.
