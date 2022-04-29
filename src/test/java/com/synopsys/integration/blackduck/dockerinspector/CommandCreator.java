@@ -23,7 +23,7 @@ public class CommandCreator {
         List<String> cmd = new ArrayList<>();
         cmd.add("java");
         cmd.add("-jar");
-        cmd.add(String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion.getProgramVersion()));
+        cmd.add(String.format("build/libs/detect-docker-inspector-%s.jar", programVersion.getProgramVersion()));
         cmd.add("--upload.bdio=false");
         cmd.add(String.format("--bdio.codelocation.name=%s", codelocationName));
         cmd.add(String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH));

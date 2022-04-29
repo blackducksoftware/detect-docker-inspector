@@ -57,7 +57,7 @@ public class IntegrationTestRunner {
 
         System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
         TestUtils.execCmd(String.join(" ", cmd), 30000L, true, testConfig.getEnv());
-        System.out.println("blackduck-docker-inspector done; verifying results...");
+        System.out.println("detect-docker-inspector done; verifying results...");
         if (actualBdio != null) {
             System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
             assertTrue(actualBdio.exists());
@@ -171,7 +171,7 @@ public class IntegrationTestRunner {
         );
         System.out.printf("Running end to end test on %s with command %s\n", targetTarFile, cmd.toString());
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
-        System.out.println("blackduck-docker-inspector done; verifying results...");
+        System.out.println("detect-docker-inspector done; verifying results...");
         System.out.printf("Expecting output BDIO file: %s\n", actualBdio.getAbsolutePath());
         assertTrue(actualBdio.exists(), String.format("%s does not exist", actualBdio.getAbsolutePath()));
         if (testConfig.isRequireBdioMatch()) {

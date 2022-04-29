@@ -72,7 +72,7 @@ public class ImageCleanupTest {
         }
 
         String programVersion = pgmVerObj.getProgramVersion();
-        List<String> partialCmd = Arrays.asList("java", "-jar", String.format("build/libs/blackduck-docker-inspector-%s.jar", programVersion),
+        List<String> partialCmd = Arrays.asList("java", "-jar", String.format("build/libs/detect-docker-inspector-%s.jar", programVersion),
             String.format("--bdio.project.name=\"%s\"", PROJECT_NAME),
             String.format("--bdio.project.version=\"%s\"", PROJECT_VERSION),
             String.format("--output.path=%s/output", TestUtils.TEST_DIR_REL_PATH),

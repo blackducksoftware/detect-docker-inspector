@@ -52,7 +52,7 @@ public class CalledFromDetectTest {
         StringBuffer sb = new StringBuffer();
         sb.append("#\n");
         sb.append(detectScriptFile.getAbsolutePath());
-        sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/blackduck-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
+        sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/detect-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
         sb.append(" --blackduck.offline.mode=true");
         sb.append(" --detect.docker.image=alpine:latest");
         sb.append(" --detect.tools.excluded=SIGNATURE_SCAN,POLARIS");
