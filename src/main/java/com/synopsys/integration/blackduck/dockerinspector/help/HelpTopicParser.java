@@ -19,10 +19,11 @@ public class HelpTopicParser {
     public static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
     public static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
     private static final String HELP_TOPIC_NAME_ALL = "all";
-    private static final String ALL_HELP_TOPICS = String.format("index,%s,architecture,quickstart,running,%s,advanced,deployment,troubleshooting,releasenotes",
-        HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES);
+    private static final String ALL_HELP_TOPICS = String.format("index,%s,architecture,running,%s,advanced,deployment,troubleshooting,releasenotes",
+        HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES
+    );
 
-    public String translateGivenTopicNames(final String givenHelpTopics) {
+    public String translateGivenTopicNames(String givenHelpTopics) {
         if (StringUtils.isBlank(givenHelpTopics)) {
             return HELP_TOPIC_NAME_OVERVIEW;
         }
@@ -32,7 +33,7 @@ public class HelpTopicParser {
         return givenHelpTopics;
     }
 
-    public List<String> deriveHelpTopicList(final String helpTopicNames) {
+    public List<String> deriveHelpTopicList(String helpTopicNames) {
         if (StringUtils.isBlank(helpTopicNames)) {
             return Arrays.asList("");
         }
