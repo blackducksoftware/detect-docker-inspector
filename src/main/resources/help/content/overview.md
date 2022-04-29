@@ -129,3 +129,16 @@ ${detect_product_name} property. To set these
 ${solution_name} properties, use the
 ${detect_product_name} detect.docker.passthrough property
 (see the ${detect_product_name} documentation for details on how to use detect.docker.passthrough).
+
+## Transitioning from Black Duck Docker Inspector to ${detect_product_name}
+
+If you have been running the Black Duck Docker Inspector directly, and need to transition to
+invoking ${solution_name} from ${detect_product_name}, here are some recommendations likely to 
+help you make the transition:
+
+1. If you run Black Duck Docker Inspector with `blackduck-docker-inspector.sh`, replace `blackduck-docker-inspector.sh` in your command line with `detect7.sh` (adjust the ${detect_product_name} major version as necessary).
+See the ${detect_product_name} documentation for information on where to get the ${detect_product_name} script.
+1. If you run Black Duck Docker Inspector with `java -jar blackduck-docker-inspector-{version}.jar`, replace `blackduck-docker-inspector-{version}.jar` in your command line with `synopsys-detect-{version}.jar`.
+See the ${detect_product_name} documentation for information on where to get the ${detect_product_name} .jar.
+1. For each of the following properties used in your command line, add `detect.` to the beginning of the property name: docker.image, docker.image.id, docker.tar, docker.platform.top.layer.id. For example, change `--docker.image=repo:tag` with `--detect.docker.image=repo:tag`.
+1. For all other Docker Inspector properties used in your command line, add `detect.docker.passthrough.` to the beginning of the property name. For example, change `--bdio.organize.components.by.layer=true` to `--detect.docker.passthrough.bdio.organize.components.by.layer=true`.
