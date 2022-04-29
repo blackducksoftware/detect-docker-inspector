@@ -16,7 +16,6 @@ docs_dir: 'generated'
 nav:
      - <b>Documentation</b>: index.md
      - Overview: overview.md
-     - Running: running.md
      - Architecture: architecture.md
      - Properties: properties.md
      - Advanced: advanced.md

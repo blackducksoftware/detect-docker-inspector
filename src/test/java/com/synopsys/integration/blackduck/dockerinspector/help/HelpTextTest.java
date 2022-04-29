@@ -81,9 +81,9 @@ public class HelpTextTest {
 
     @Test
     public void testAll() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("overview,architecture,running,properties,advanced,deployment,troubleshooting,releasenotes"))
-            .thenReturn(Arrays.asList("overview", "architecture", "running", "properties", "advanced", "deployment", "troubleshooting", "releasenotes"));
+        Mockito.when(helpTopicParser.translateGivenTopicNames("all")).thenReturn("overview,architecture,properties,advanced,deployment,troubleshooting,releasenotes");
+        Mockito.when(helpTopicParser.deriveHelpTopicList("overview,architecture,properties,advanced,deployment,troubleshooting,releasenotes"))
+            .thenReturn(Arrays.asList("overview", "architecture", "properties", "advanced", "deployment", "troubleshooting", "releasenotes"));
         SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
@@ -94,8 +94,6 @@ public class HelpTextTest {
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/architecture.md"), StandardCharsets.UTF_8);
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("architecture")).thenReturn(helpString);
-        helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/running.md"), StandardCharsets.UTF_8);
-        Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("running")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/advanced.md"), StandardCharsets.UTF_8);
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("advanced")).thenReturn(helpString);
         helpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);

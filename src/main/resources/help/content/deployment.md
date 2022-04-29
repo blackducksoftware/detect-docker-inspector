@@ -43,7 +43,7 @@ Because in this mode you (not ${solution_name}) are deploying the image inspecto
 you must ensure that you deploy the correct version of the image inspector images for the
 version of ${solution_name} that you run. This is easier if you explicitly control the version of
 ${solution_name}, rather than letting ${detect_product_name} auto-update ${solution_name}.
-See [Running](running.md) for details.
+See the ${detect_product_name} for details.
  
 ### Image Inspector Services
 
