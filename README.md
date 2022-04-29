@@ -3,7 +3,7 @@
 Detect Docker Inspector is a Synopsys Detect inspector that enables Synopsys Detect to analyze your docker images without running them.
 Detect Docker Inspector is invoked by running Synopsys Detect.
 
-Information on using Synopsys Detect can be found [here](https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=introduction.html)
+Information on using Synopsys Detect can be found [here](https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=introduction.html).
 
 # Build #
 [![Build Status](https://travis-ci.org/blackducksoftware/detect-docker-inspector.svg?branch=master)](https://travis-ci.org/blackducksoftware/detect-docker-inspector)
@@ -13,7 +13,7 @@ Information on using Synopsys Detect can be found [here](https://community.synop
 
 ## User documentation ##
 The documentation for Synopsys Detect can be found [here](https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=introduction.html).
-Additional details relevant to the Detect Docker Inspectore can be found [here](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/187596884/Black+Duck+Docker+Inspector)
+Additional details relevant to the Detect Docker Inspectore can be found [here](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/187596884/Black+Duck+Docker+Inspector).
 
 ## Getting help
 
