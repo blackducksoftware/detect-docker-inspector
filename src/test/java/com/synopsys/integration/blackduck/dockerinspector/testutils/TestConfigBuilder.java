@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.testutils;
 
 import java.io.File;
 import java.util.List;
@@ -30,112 +30,112 @@ public class TestConfigBuilder {
     private long maxContainerFileSystemFileSize;
     private boolean appOnlyMode;
 
-    public TestConfigBuilder setAppOnlyMode(final boolean appOnlyMode) {
+    public TestConfigBuilder setAppOnlyMode(boolean appOnlyMode) {
         this.appOnlyMode = appOnlyMode;
         return this;
     }
 
-    public TestConfigBuilder setMode(final TestConfig.Mode mode) {
+    public TestConfigBuilder setMode(TestConfig.Mode mode) {
         this.mode = mode;
         return this;
     }
 
-    public TestConfigBuilder setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
+    public TestConfigBuilder setInspectTargetImageRepoTag(String inspectTargetImageRepoTag) {
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
         return this;
     }
 
-    public TestConfigBuilder setInspectTargetImageId(final String inspectTargetImageId) {
+    public TestConfigBuilder setInspectTargetImageId(String inspectTargetImageId) {
         this.inspectTargetImageId = inspectTargetImageId;
         return this;
     }
 
-    public TestConfigBuilder setTarFilePath(final String tarFilePath) {
+    public TestConfigBuilder setTarFilePath(String tarFilePath) {
         this.tarFilePath = tarFilePath;
         return this;
     }
 
-    public TestConfigBuilder setTargetRepo(final String targetRepo) {
+    public TestConfigBuilder setTargetRepo(String targetRepo) {
         this.targetRepo = targetRepo;
         return this;
     }
 
-    public TestConfigBuilder setTargetTag(final String targetTag) {
+    public TestConfigBuilder setTargetTag(String targetTag) {
         this.targetTag = targetTag;
         return this;
     }
 
-    public TestConfigBuilder setPortOnHost(final int portOnHost) {
+    public TestConfigBuilder setPortOnHost(int portOnHost) {
         this.portOnHost = portOnHost;
         return this;
     }
 
-    public TestConfigBuilder setRequireBdioMatch(final boolean requireBdioMatch) {
+    public TestConfigBuilder setRequireBdioMatch(boolean requireBdioMatch) {
         this.requireBdioMatch = requireBdioMatch;
         return this;
     }
 
-    public TestConfigBuilder setMinNumberOfComponentsExpected(final int minNumberOfComponentsExpected) {
+    public TestConfigBuilder setMinNumberOfComponentsExpected(int minNumberOfComponentsExpected) {
         this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
         return this;
     }
 
-    public TestConfigBuilder setOutputBomMustContainComponentPrefix(final String outputBomMustContainComponentPrefix) {
+    public TestConfigBuilder setOutputBomMustContainComponentPrefix(String outputBomMustContainComponentPrefix) {
         this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
         return this;
     }
 
-    public TestConfigBuilder setOutputBomMustNotContainComponentPrefix(final String outputBomMustNotContainComponentPrefix) {
+    public TestConfigBuilder setOutputBomMustNotContainComponentPrefix(String outputBomMustNotContainComponentPrefix) {
         this.outputBomMustNotContainComponentPrefix = outputBomMustNotContainComponentPrefix;
         return this;
     }
 
-    public TestConfigBuilder setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {
+    public TestConfigBuilder setOutputBomMustContainExternalSystemTypeId(String outputBomMustContainExternalSystemTypeId) {
         this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
         return this;
     }
 
-    public TestConfigBuilder setCodelocationName(final String codelocationName) {
+    public TestConfigBuilder setCodelocationName(String codelocationName) {
         this.codelocationName = codelocationName;
         return this;
     }
 
-    public TestConfigBuilder setAdditionalArgs(final List<String> additionalArgs) {
+    public TestConfigBuilder setAdditionalArgs(List<String> additionalArgs) {
         this.additionalArgs = additionalArgs;
         return this;
     }
 
-    public TestConfigBuilder setEnv(final Map<String, String> env) {
+    public TestConfigBuilder setEnv(Map<String, String> env) {
         this.env = env;
         return this;
     }
 
-    public TestConfigBuilder setTestSquashedImageGeneration(final boolean testSquashedImageGeneration) {
+    public TestConfigBuilder setTestSquashedImageGeneration(boolean testSquashedImageGeneration) {
         this.testSquashedImageGeneration = testSquashedImageGeneration;
         return this;
     }
 
-    public TestConfigBuilder setOutputContainerFileSystemFile(final File outputContainerFileSystemFile) {
+    public TestConfigBuilder setOutputContainerFileSystemFile(File outputContainerFileSystemFile) {
         this.outputContainerFileSystemFile = outputContainerFileSystemFile;
         return this;
     }
 
-    public TestConfigBuilder setOutputSquashedImageFile(final File outputSquashedImageFile) {
+    public TestConfigBuilder setOutputSquashedImageFile(File outputSquashedImageFile) {
         this.outputSquashedImageFile = outputSquashedImageFile;
         return this;
     }
 
-    public TestConfigBuilder setTargetTarInSharedDir(final File targetTarInSharedDir) {
+    public TestConfigBuilder setTargetTarInSharedDir(File targetTarInSharedDir) {
         this.targetTarInSharedDir = targetTarInSharedDir;
         return this;
     }
 
-    public TestConfigBuilder setMinContainerFileSystemFileSize(final long minContainerFileSystemFileSize) {
+    public TestConfigBuilder setMinContainerFileSystemFileSize(long minContainerFileSystemFileSize) {
         this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
         return this;
     }
 
-    public TestConfigBuilder setMaxContainerFileSystemFileSize(final long maxContainerFileSystemFileSize) {
+    public TestConfigBuilder setMaxContainerFileSystemFileSize(long maxContainerFileSystemFileSize) {
         this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
         return this;
     }
@@ -148,7 +148,8 @@ public class TestConfigBuilder {
             outputBomMustContainComponentPrefix, outputBomMustNotContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
             outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize,
-            appOnlyMode);
+            appOnlyMode
+        );
     }
 }
 

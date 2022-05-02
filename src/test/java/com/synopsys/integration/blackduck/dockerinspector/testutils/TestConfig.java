@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.testutils;
 
 import java.io.File;
 import java.util.List;
@@ -28,7 +28,6 @@ public class TestConfig {
     private long maxContainerFileSystemFileSize;
     private boolean appOnlyMode;
 
-
     public enum Mode {
         NO_SERVICE_START,
         DEFAULT,
@@ -36,12 +35,30 @@ public class TestConfig {
         DETECT
     }
 
-    public TestConfig(final Mode mode, final String inspectTargetImageRepoTag, final String inspectTargetImageId, final String tarFilePath, final String targetRepo, final String targetTag, final int portOnHost, final boolean requireBdioMatch, final int minNumberOfComponentsExpected,
-        final String outputBomMustContainComponentPrefix,
-        final String outputBomMustNotContainComponentPrefix,
-        final String outputBomMustContainExternalSystemTypeId, final String codelocationName, final List<String> additionalArgs, final Map<String, String> env, final boolean testSquashedImageGeneration,
-        final File outputContainerFileSystemFile, final File outputSquashedImageFile, final File targetTarInSharedDir,
-        final long minContainerFileSystemFileSize, final long maxContainerFileSystemFileSize, final boolean appOnlyMode) {
+    public TestConfig(
+        Mode mode,
+        String inspectTargetImageRepoTag,
+        String inspectTargetImageId,
+        String tarFilePath,
+        String targetRepo,
+        String targetTag,
+        int portOnHost,
+        boolean requireBdioMatch,
+        int minNumberOfComponentsExpected,
+        String outputBomMustContainComponentPrefix,
+        String outputBomMustNotContainComponentPrefix,
+        String outputBomMustContainExternalSystemTypeId,
+        String codelocationName,
+        List<String> additionalArgs,
+        Map<String, String> env,
+        boolean testSquashedImageGeneration,
+        File outputContainerFileSystemFile,
+        File outputSquashedImageFile,
+        File targetTarInSharedDir,
+        long minContainerFileSystemFileSize,
+        long maxContainerFileSystemFileSize,
+        boolean appOnlyMode
+    ) {
         this.mode = mode;
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
         this.inspectTargetImageId = inspectTargetImageId;
@@ -154,87 +171,87 @@ public class TestConfig {
         return appOnlyMode;
     }
 
-    public void setInspectTargetImageRepoTag(final String inspectTargetImageRepoTag) {
+    public void setInspectTargetImageRepoTag(String inspectTargetImageRepoTag) {
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
     }
 
-    public void setTarFilePath(final String tarFilePath) {
+    public void setTarFilePath(String tarFilePath) {
         this.tarFilePath = tarFilePath;
     }
 
-    public void setTargetRepo(final String targetRepo) {
+    public void setTargetRepo(String targetRepo) {
         this.targetRepo = targetRepo;
     }
 
-    public void setTargetTag(final String targetTag) {
+    public void setTargetTag(String targetTag) {
         this.targetTag = targetTag;
     }
 
-    public void setPortOnHost(final int portOnHost) {
+    public void setPortOnHost(int portOnHost) {
         this.portOnHost = portOnHost;
     }
 
-    public void setRequireBdioMatch(final boolean requireBdioMatch) {
+    public void setRequireBdioMatch(boolean requireBdioMatch) {
         this.requireBdioMatch = requireBdioMatch;
     }
 
-    public void setMinNumberOfComponentsExpected(final int minNumberOfComponentsExpected) {
+    public void setMinNumberOfComponentsExpected(int minNumberOfComponentsExpected) {
         this.minNumberOfComponentsExpected = minNumberOfComponentsExpected;
     }
 
-    public void setOutputBomMustContainComponentPrefix(final String outputBomMustContainComponentPrefix) {
+    public void setOutputBomMustContainComponentPrefix(String outputBomMustContainComponentPrefix) {
         this.outputBomMustContainComponentPrefix = outputBomMustContainComponentPrefix;
     }
 
-    public void setOutputBomMustNotContainComponentPrefix(final String outputBomMustNotContainComponentPrefix) {
+    public void setOutputBomMustNotContainComponentPrefix(String outputBomMustNotContainComponentPrefix) {
         this.outputBomMustNotContainComponentPrefix = outputBomMustNotContainComponentPrefix;
     }
 
-    public void setOutputBomMustContainExternalSystemTypeId(final String outputBomMustContainExternalSystemTypeId) {
+    public void setOutputBomMustContainExternalSystemTypeId(String outputBomMustContainExternalSystemTypeId) {
         this.outputBomMustContainExternalSystemTypeId = outputBomMustContainExternalSystemTypeId;
     }
 
-    public void setCodelocationName(final String codelocationName) {
+    public void setCodelocationName(String codelocationName) {
         this.codelocationName = codelocationName;
     }
 
-    public void setAdditionalArgs(final List<String> additionalArgs) {
+    public void setAdditionalArgs(List<String> additionalArgs) {
         this.additionalArgs = additionalArgs;
     }
 
-    public void setTestSquashedImageGeneration(final boolean testSquashedImageGeneration) {
+    public void setTestSquashedImageGeneration(boolean testSquashedImageGeneration) {
         this.testSquashedImageGeneration = testSquashedImageGeneration;
     }
 
-    public void setMode(final Mode mode) {
+    public void setMode(Mode mode) {
         this.mode = mode;
     }
 
-    public void setEnv(final Map<String, String> env) {
+    public void setEnv(Map<String, String> env) {
         this.env = env;
     }
 
-    public void setOutputContainerFileSystemFile(final File outputContainerFileSystemFile) {
+    public void setOutputContainerFileSystemFile(File outputContainerFileSystemFile) {
         this.outputContainerFileSystemFile = outputContainerFileSystemFile;
     }
 
-    public void setOutputSquashedImageFile(final File outputSquashedImageFile) {
+    public void setOutputSquashedImageFile(File outputSquashedImageFile) {
         this.outputSquashedImageFile = outputSquashedImageFile;
     }
 
-    public void setTargetTarInSharedDir(final File targetTarInSharedDir) {
+    public void setTargetTarInSharedDir(File targetTarInSharedDir) {
         this.targetTarInSharedDir = targetTarInSharedDir;
     }
 
-    public void setMinContainerFileSystemFileSize(final long minContainerFileSystemFileSize) {
+    public void setMinContainerFileSystemFileSize(long minContainerFileSystemFileSize) {
         this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
     }
 
-    public void setMaxContainerFileSystemFileSize(final long maxContainerFileSystemFileSize) {
+    public void setMaxContainerFileSystemFileSize(long maxContainerFileSystemFileSize) {
         this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
     }
 
-    public void setAppOnlyMode(final boolean appOnlyMode) {
+    public void setAppOnlyMode(boolean appOnlyMode) {
         this.appOnlyMode = appOnlyMode;
     }
 }

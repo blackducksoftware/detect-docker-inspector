@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.testutils;
 
 public class ListComparisonData {
     private boolean equalContent;
@@ -11,7 +11,7 @@ public class ListComparisonData {
         ignoredLines = 0;
     }
 
-    public ListComparisonData(final boolean equalContent, final int matchedLines, final int ignoredLines) {
+    public ListComparisonData(boolean equalContent, int matchedLines, int ignoredLines) {
         this.equalContent = equalContent;
         this.matchedLines = matchedLines;
         this.ignoredLines = ignoredLines;

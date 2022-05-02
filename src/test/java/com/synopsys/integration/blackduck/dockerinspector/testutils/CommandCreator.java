@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.testutils;
 
 import java.io.File;
 import java.util.ArrayList;

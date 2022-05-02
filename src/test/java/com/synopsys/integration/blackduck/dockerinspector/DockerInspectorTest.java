@@ -19,6 +19,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.CommandCreator;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.TestConfig;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.TestConfigBuilder;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
 import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")

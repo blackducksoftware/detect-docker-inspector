@@ -20,6 +20,9 @@ import com.synopsys.integration.bdio.BdioReader;
 import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.CommandCreator;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.TestConfig;
+import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class IntegrationTestRunner {
