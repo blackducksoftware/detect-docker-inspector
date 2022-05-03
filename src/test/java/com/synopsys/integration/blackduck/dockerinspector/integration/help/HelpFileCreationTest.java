@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.help;
+package com.synopsys.integration.blackduck.dockerinspector.integration.help;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

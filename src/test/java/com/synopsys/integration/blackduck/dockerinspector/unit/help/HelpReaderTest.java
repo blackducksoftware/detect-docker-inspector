@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.help;
+package com.synopsys.integration.blackduck.dockerinspector.unit.help;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpReader;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 

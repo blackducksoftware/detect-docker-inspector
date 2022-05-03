@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.dockerclient;
+package com.synopsys.integration.blackduck.dockerinspector.integration.dockerclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -24,6 +24,7 @@ import com.github.dockerjava.api.exception.DockerClientException;
 import com.github.dockerjava.api.exception.InternalServerErrorException;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
 import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;

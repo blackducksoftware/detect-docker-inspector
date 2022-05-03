@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.help;
+package com.synopsys.integration.blackduck.dockerinspector.unit.help;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,6 +19,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpReader;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
+import com.synopsys.integration.blackduck.dockerinspector.help.HelpTopicParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.exception.IntegrationException;
 

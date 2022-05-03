@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector;
+package com.synopsys.integration.blackduck.dockerinspector.unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
