@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.httpclient;
+package com.synopsys.integration.blackduck.dockerinspector.unit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.ImageInspectorUrlBuilder;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class ImageInspectorUrlBuilderTest {

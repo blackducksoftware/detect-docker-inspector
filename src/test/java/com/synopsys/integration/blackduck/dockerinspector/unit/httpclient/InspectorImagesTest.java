@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.httpclient;
+package com.synopsys.integration.blackduck.dockerinspector.unit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 

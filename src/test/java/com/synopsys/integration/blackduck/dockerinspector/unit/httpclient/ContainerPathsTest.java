@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.httpclient;
+package com.synopsys.integration.blackduck.dockerinspector.unit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.ContainerPaths;
 
 class ContainerPathsTest {
 
@@ -44,8 +45,10 @@ class ContainerPathsTest {
         doTest(sharedDirPathLocal, sharedDirPathContainer, targetFilePathLocal);
     }
 
-    private void doTest(String sharedDirPathLocal, String sharedDirPathContainer,
-        String targetFilePathLocal) throws IOException {
+    private void doTest(
+        String sharedDirPathLocal, String sharedDirPathContainer,
+        String targetFilePathLocal
+    ) throws IOException {
         Config config = Mockito.mock(Config.class);
         Mockito.when(config.getSharedDirPathLocal()).thenReturn(sharedDirPathLocal);
         Mockito.when(config.getSharedDirPathImageInspector()).thenReturn(sharedDirPathContainer);

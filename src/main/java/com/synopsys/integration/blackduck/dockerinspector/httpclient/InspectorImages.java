@@ -7,8 +7,6 @@
  */
 package com.synopsys.integration.blackduck.dockerinspector.httpclient;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 
 @Component
 public class InspectorImages {
@@ -32,9 +32,9 @@ public class InspectorImages {
     private final Map<ImageInspectorOsEnum, InspectorImage> inspectorImageMap = new HashMap<>();
 
     @PostConstruct
-    void init() {
+    public void init() {
         String repoWithSeparator;
-        final String repo = config.getInspectorRepository();
+        String repo = config.getInspectorRepository();
         if (StringUtils.isBlank(repo)) {
             repoWithSeparator = "";
         } else if (StringUtils.isNotBlank(repo) && repo.endsWith("/")) {
@@ -55,16 +55,16 @@ public class InspectorImages {
         inspectorImageMap.put(ImageInspectorOsEnum.ALPINE, new InspectorImage(ImageInspectorOsEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
     }
 
-    public String getInspectorImageName(final ImageInspectorOsEnum targetImageOs) {
-        final InspectorImage image = inspectorImageMap.get(targetImageOs);
+    public String getInspectorImageName(ImageInspectorOsEnum targetImageOs) {
+        InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
         }
         return image.getImageName();
     }
 
-    public String getInspectorImageTag(final ImageInspectorOsEnum targetImageOs) {
-        final InspectorImage image = inspectorImageMap.get(targetImageOs);
+    public String getInspectorImageTag(ImageInspectorOsEnum targetImageOs) {
+        InspectorImage image = inspectorImageMap.get(targetImageOs);
         if (image == null) {
             return null;
         }

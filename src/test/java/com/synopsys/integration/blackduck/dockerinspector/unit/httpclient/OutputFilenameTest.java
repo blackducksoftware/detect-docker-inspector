@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.httpclient;
+package com.synopsys.integration.blackduck.dockerinspector.unit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

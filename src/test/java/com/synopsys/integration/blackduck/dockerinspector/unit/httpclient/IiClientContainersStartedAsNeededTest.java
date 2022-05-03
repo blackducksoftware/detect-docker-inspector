@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.httpclient;
+package com.synopsys.integration.blackduck.dockerinspector.unit.httpclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +15,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.github.dockerjava.api.model.Container;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.ContainerName;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpConnectionCreator;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpRequestor;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.ImageInspectorClientStartServices;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.ImageInspectorServices;
+import com.synopsys.integration.blackduck.dockerinspector.httpclient.InspectorImages;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
