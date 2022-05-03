@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.output;
+package com.synopsys.integration.blackduck.dockerinspector.integration.output;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -28,6 +27,13 @@ import com.synopsys.integration.bdio.model.SimpleBdioDocument;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.synopsys.integration.blackduck.dockerinspector.output.CompressedFile;
+import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.synopsys.integration.blackduck.dockerinspector.output.Output;
+import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
+import com.synopsys.integration.blackduck.dockerinspector.output.SquashedImage;
+import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
 
@@ -62,7 +68,7 @@ public class OutputTest {
     public static void setup() throws IOException {
         Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         rootLogger.setLevel(Level.INFO);
-        Logger integrationLogger = (Logger)LoggerFactory.getLogger("com.synopsys.integration");
+        Logger integrationLogger = (Logger) LoggerFactory.getLogger("com.synopsys.integration");
         integrationLogger.setLevel(Level.DEBUG);
 
         File testHome = new File("test/output/squashedImageCreation");

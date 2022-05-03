@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.output;
+package com.synopsys.integration.blackduck.dockerinspector.unit.output;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.synopsys.integration.blackduck.dockerinspector.output.CompressedFile;
+
 public class CompressedFileTest {
     private static File fileToCompress;
     private static File compressedFile;
@@ -21,7 +23,7 @@ public class CompressedFileTest {
 
     @BeforeAll
     public static void setUp() throws IOException {
-        final File testDir = new File("test");
+        File testDir = new File("test");
         testDir.mkdirs();
         fileToCompress = new File(testDir, "fileToCompress.txt");
         compressedFile = new File(testDir, "fileToCompress.txt.gz");
@@ -55,33 +57,33 @@ public class CompressedFileTest {
 
     @Test
     public void testGunZipFile() throws IOException {
-        final File fileToUnZip = new File("src/test/resources/test1.tar.gz");
-        final File unCompressedFile = new File("test/output/test.tar");
+        File fileToUnZip = new File("src/test/resources/test1.tar.gz");
+        File unCompressedFile = new File("test/output/test.tar");
         CompressedFile.gunZipFile(fileToUnZip, unCompressedFile);
         assertTrue(unCompressedFile.exists());
     }
 
     @Test
     public void testUnTarFile() throws IOException {
-        final File fileToUnTar = new File("src/test/resources/test2.tar");
+        File fileToUnTar = new File("src/test/resources/test2.tar");
 
         CompressedFile.unTarFile(fileToUnTar, destinationDir);
 
-        final File expectedFile1 = new File(destinationDir, "test2.txt");
+        File expectedFile1 = new File(destinationDir, "test2.txt");
         assertTrue(expectedFile1.exists());
 
-        final File expectedFile2 = new File(destinationDir, "subdir/test3.txt");
+        File expectedFile2 = new File(destinationDir, "subdir/test3.txt");
         assertTrue(expectedFile2.exists());
     }
 
     @Test
     public void testGunZipUnTarFile() throws IOException {
-        final File fileToUnpack = new File("src/test/resources/test1.tar.gz");
+        File fileToUnpack = new File("src/test/resources/test1.tar.gz");
         assertTrue(fileToUnpack.exists());
         assertFalse(tempTarFile.exists());
 
         CompressedFile.gunZipUnTarFile(fileToUnpack, tempTarFile, testTarGzDir);
-        final File unpackedFile = new File("test/output/testTarGzDir/test1.txt");
+        File unpackedFile = new File("test/output/testTarGzDir/test1.txt");
         assertTrue(unpackedFile.exists());
     }
 

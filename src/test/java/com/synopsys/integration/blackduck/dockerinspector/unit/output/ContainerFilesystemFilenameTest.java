@@ -1,4 +1,4 @@
-package com.synopsys.integration.blackduck.dockerinspector.output;
+package com.synopsys.integration.blackduck.dockerinspector.unit.output;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
+import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
 
 @ExtendWith(SpringExtension.class)
 public class ContainerFilesystemFilenameTest {

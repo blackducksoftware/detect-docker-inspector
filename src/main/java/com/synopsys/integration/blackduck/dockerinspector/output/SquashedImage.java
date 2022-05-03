@@ -45,8 +45,10 @@ public class SquashedImage {
         this.fileOperations = fileOperations;
     }
 
-    public void createSquashedImageTarGz(File targetImageFileSystemTarGz, File squashedImageTarGz,
-        File tempTarFile, File tempWorkingDir) throws IOException, IntegrationException {
+    public void createSquashedImageTarGz(
+        File targetImageFileSystemTarGz, File squashedImageTarGz,
+        File tempTarFile, File tempWorkingDir
+    ) throws IOException, IntegrationException {
         logger.info(String.format("Transforming container filesystem %s to squashed image %s", targetImageFileSystemTarGz, squashedImageTarGz));
         File dockerBuildDir = tempWorkingDir;
         File containerFileSystemDir = new File(dockerBuildDir, "containerFileSystem");
@@ -78,7 +80,7 @@ public class SquashedImage {
         }
     }
 
-    String generateUniqueImageRepoTag() throws IntegrationException {
+    public String generateUniqueImageRepoTag() throws IntegrationException {
 
         for (int i = 0; i < MAX_NAME_GENERATION_ATTEMPTS; i++) {
             int randomImageRepoIndex = (int) (Math.random() * MAX_IMAGE_REPO_INDEX);
