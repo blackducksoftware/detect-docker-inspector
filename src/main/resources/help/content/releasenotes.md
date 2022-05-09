@@ -3,10 +3,12 @@
 ##### Changed features
 
 * Changed name from Black Duck Docker Inspector to Detect Docker Inspector.
+* Changed the default value for imageinspector.service.log.length from 10,000 lines to 50,000 lines.
 
 ##### Removed features
 
 * Dropped support for running Docker Inspector as a standalone utility (executing either blackduck-docker-inspector.sh or the .jar). Detect Docker Inspector must now be invoked by running Synopsys Detect.
+* Removed all properties involved in directly connecting to Black Duck ("blackduck.*"). Use ${detect_product_name} properties instead.
 
 #### Version 9.4.3
 
