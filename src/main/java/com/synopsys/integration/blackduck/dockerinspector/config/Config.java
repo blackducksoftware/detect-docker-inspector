@@ -234,9 +234,9 @@ public class Config {
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
-    @ValueDescription(description = "The number of lines of the image inspector service log to include in the Docker Inspector log when log level is DEBUG or higher", defaultValue = "10000", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${imageinspector.service.log.length:10000}")
-    private Integer imageInspectorServiceLogLength = 10000;
+    @ValueDescription(description = "The number of lines of the image inspector service log to include in the Docker Inspector log when log level is DEBUG or higher", defaultValue = "50000", group = Config.GROUP_PUBLIC, deprecated = false)
+    @Value("${imageinspector.service.log.length:50000}")
+    private Integer imageInspectorServiceLogLength = 50000;
 
     @ValueDescription(description = "Make no attempts to access network-based resources (the docker repository)", defaultValue = "false", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${offline.mode:false}")
