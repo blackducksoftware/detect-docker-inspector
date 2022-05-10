@@ -79,7 +79,7 @@ public class HelpTextTest {
 
         String deploymentHtml = helpText.getMarkdownForTopic("deployment");
 
-        assertTrue(deploymentHtml.contains("${solution_name} can be run in either of the following modes:"));
+        assertTrue(deploymentHtml.contains("${docker_inspector_name} can be run in either of the following modes:"));
     }
 
     @Test
