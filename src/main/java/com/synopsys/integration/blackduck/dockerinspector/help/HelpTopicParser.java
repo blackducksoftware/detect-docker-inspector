@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class HelpTopicParser {
 
     public static final String HELP_TOPIC_NAME_OVERVIEW = "overview";
-    public static final String HELP_TOPIC_NAME_PROPERTIES = "properties";
+    public static final String HELP_TOPIC_NAME_PROPERTIES = "advanced-properties";
     private static final String HELP_TOPIC_NAME_ALL = "all";
     private static final String ALL_HELP_TOPICS = String.format("index,%s,architecture,%s,advanced,deployment,troubleshooting,releasenotes",
         HELP_TOPIC_NAME_OVERVIEW, HELP_TOPIC_NAME_PROPERTIES

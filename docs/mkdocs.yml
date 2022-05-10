@@ -17,7 +17,7 @@ nav:
      - <b>Documentation</b>: index.md
      - Overview: overview.md
      - Architecture: architecture.md
-     - Properties: properties.md
+     - Properties: advanced-properties.md
      - Advanced: advanced.md
      - Deploying: deployment.md
      - Troubleshooting: troubleshooting.md
