@@ -1,3 +1,4 @@
+// There's probably a way to eliminate the need for buildSrc/, but right now the createReadme gradle task fails when buildSrc/ is removed
 buildscript {
     ext {
         springBootVersion = '2.6.6'
