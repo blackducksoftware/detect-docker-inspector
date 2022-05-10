@@ -13,26 +13,15 @@ buildscript {
     }
 }
 
-//plugins {
-//    id 'org.springframework.boot' version "${springBootVersion}" apply false
-//}
 version = "1.0.0-SNAPSHOT"
 apply plugin: 'com.synopsys.integration.simple'
 apply plugin: 'io.spring.dependency-management'
-
-//dependencyManagement {
-//    imports {
-//        mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-//    }
-//}
 
 dependencies {
     implementation "org.freemarker:freemarker:2.3.26-incubating"
     implementation("com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}") {
         exclude group: 'org.springframework', module: 'spring-core'
     }
-    //implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
     implementation "com.synopsys.integration:integration-common:20.0.0"
-    //implementation 'org.springframework:spring-core'
     implementation gradleApi()
 }
