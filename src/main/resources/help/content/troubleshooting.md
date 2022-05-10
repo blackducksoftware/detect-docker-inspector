@@ -1,6 +1,6 @@
 # Troubleshooting overview
 
-To troubleshoot issues with ${solution_name}, run with DEBUG logging:
+To troubleshoot issues with ${docker_inspector_name}, run with DEBUG logging:
 
     --logging.level.com.synopsys=DEBUG
 
@@ -8,7 +8,7 @@ To troubleshoot issues with ${solution_name}, run with DEBUG logging:
 
 #### Docker file sharing settings
 
-${solution_name} requires the ability to share directories with the image inspector containers.
+${docker_inspector_name} requires the ability to share directories with the image inspector containers.
 It shares a directory with image inspector containers by mounting it as a volume.
 You will need to configure your Docker settings to enable this file sharing.
 The simplest way to do this is to add your home directory as a sharable directory
@@ -21,7 +21,7 @@ sharing of that directory.
 
 #### Docker restrictions
 
-Docker on Windows has restrictions that impact ${solution_name}:
+Docker on Windows has restrictions that impact ${docker_inspector_name}:
 
 1. Docker can be configured to pull either Linix images, or Windows images.
 You can see how your Docker installation is configured by looking
@@ -47,9 +47,9 @@ Solution/workaround: Set the character encoding to UTF-8 when invoking Java:
     
 ### Problem: Property values are set in unexpected ways.
 
-Possible cause: ${solution_name} is built using the Spring Boot application framework.
+Possible cause: ${docker_inspector_name} is built using the Spring Boot application framework.
 Spring Boot provides a variety of ways to set property values. This can produce unexpected results if,
-for example, you have an environment variable whose name maps to a ${solution_name} property name.
+for example, you have an environment variable whose name maps to a ${docker_inspector_name} property name.
 Refer to the
 [Spring Boot documentation](${spring_boot_config_doc_url})
 for more details.
@@ -64,8 +64,8 @@ When this happens, the following error may appear in the container log:
 
 Possible cause: SELinux policy configuration.
 
-Solution/workaround: Add the *svirt_sandbox_file_t* label to ${solution_name}'s shared directory.
-This enables the ${solution_name} services running in Docker containers to write to it:
+Solution/workaround: Add the *svirt_sandbox_file_t* label to ${docker_inspector_name}'s shared directory.
+This enables the ${docker_inspector_name} services running in Docker containers to write to it:
                      
     sudo chcon -Rt svirt_sandbox_file_t /tmp/${project_name}-files/shared/
 
@@ -75,21 +75,21 @@ When this happens, the following error may appear in the container log:
 
     Error inspecting image: ${container_image_inspector_dir_path}/shared/run_.../{image}.tar (Permission denied)
     
-Possible cause: The Linux umask value on the machine running ${solution_name} is too restrictive.
+Possible cause: The Linux umask value on the machine running ${docker_inspector_name} is too restrictive.
 
-Solution/workaround: Set the umask value to 022 when running ${solution_name}. The cause could be a umask value
+Solution/workaround: Set the umask value to 022 when running ${docker_inspector_name}. The cause could be a umask value
 that prevents read access to the file, or read or execute access to the directory.
-${solution_name} requires a umask value that does not remove read permissions from files 
+${docker_inspector_name} requires a umask value that does not remove read permissions from files 
 and does not remove read or execute permissions from directories. For example, a umask value of 022 works.
 
-### Problem: ${solution_name} cannot perform Docker operations because the remote access port is not enabled on the Docker engine.
+### Problem: ${docker_inspector_name} cannot perform Docker operations because the remote access port is not enabled on the Docker engine.
 
 When this happens, the following error may display in the log:
 
     Error inspecting image: java.io.IOException: Couldn't load native library
     Stack trace: javax.ws.rs.ProcessingException: java.io.IOException: Couldn't load native library
 
-In versions of ${solution_name} prior to 8.2.0, the logged error was:
+In versions of ${docker_inspector_name} prior to 8.2.0, the logged error was:
 
     Error inspecting image: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
     Stack trace: java.lang.NoClassDefFoundError: Could not initialize class org.newsclub.net.unix.NativeUnixSocket
