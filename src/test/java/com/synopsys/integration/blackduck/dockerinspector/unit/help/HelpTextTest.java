@@ -63,7 +63,7 @@ public class HelpTextTest {
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
 
-        String usageString = helpText.getMarkdownForTopic("properties");
+        String usageString = helpText.getMarkdownForTopic("advanced-properties");
 
         assertTrue(usageString.contains("Property name | Type | Description | Default value | Deprecation Status | Deprecation Message\n"));
         assertTrue(usageString.contains("-------------\n"));
