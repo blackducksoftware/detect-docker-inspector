@@ -46,6 +46,10 @@ jar {
     enabled = false
 }
 
+def createArtifactName() {
+    return "${buildDir}/libs/${project.name}-${version}.jar"
+}
+
 repositories {
     maven { url "https://sig-repo.synopsys.com/bds-bdio-release" }
 }
@@ -107,7 +111,7 @@ task docsPrep() {
 
 task generateHelpMarkdown(type: Exec, dependsOn: [docsPrep, bootJar]) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${buildDir}/libs/${project.name}-${version}.jar", "--help", "all", "--help.output.path=docs/generated"
+    commandLine "java", "-jar", "${createArtifactName()}", "--help", "all", "--help.output.path=docs/generated"
 }
 
 def outputPath = "docs/generated"
@@ -287,8 +291,7 @@ test.dependsOn testPrep
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            def artifactName = "${buildDir}/libs/${project.name}-${version}.jar"
-            artifact(artifactName)
+            artifact("${createArtifactName()}")
         }
     }
 }
