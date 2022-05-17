@@ -45,8 +45,6 @@ public class HelpTextTest {
 
     @Test
     public void testOverview() throws IntegrationException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("overview")).thenReturn("overview");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("overview")).thenReturn(Arrays.asList("overview"));
         final String actualHelpString = "help line 1\nhelp line 2";
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("overview")).thenReturn(actualHelpString);
 
@@ -57,8 +55,6 @@ public class HelpTextTest {
 
     @Test
     public void testProperties() throws IntegrationException, IllegalArgumentException, IllegalAccessException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("properties")).thenReturn("properties");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("properties")).thenReturn(Arrays.asList("properties"));
         SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
@@ -72,8 +68,6 @@ public class HelpTextTest {
 
     @Test
     public void testDeployment() throws IntegrationException, IllegalArgumentException, IllegalAccessException, IOException {
-        Mockito.when(helpTopicParser.translateGivenTopicNames("deployment")).thenReturn("deployment");
-        Mockito.when(helpTopicParser.deriveHelpTopicList("deployment")).thenReturn(Arrays.asList("deployment"));
         String deploymentHelpString = FileUtils.readFileToString(new File("src/main/resources/help/content/deployment.md"), StandardCharsets.UTF_8);
         Mockito.when(helpReader.getVariableSubstitutedTextFromHelpFile("deployment")).thenReturn(deploymentHelpString);
 
