@@ -26,7 +26,6 @@ import com.google.gson.Gson;
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
 import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
 import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
@@ -44,9 +43,6 @@ public class DockerInspector implements ApplicationRunner {
     private static final Logger logger = LoggerFactory.getLogger(DockerInspector.class);
 
     private static final String DETECT_CALLER_NAME = "Detect";
-
-    @Autowired
-    private DockerClientManager dockerClientManager;
 
     @Autowired
     private ProgramVersion programVersion;
@@ -84,24 +80,21 @@ public class DockerInspector implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments applicationArguments) {
+    public void run(ApplicationArguments applicationArguments) throws InterruptedException {
         Result result = null;
         try {
-            System.out.println("Calling initAndValidate()");
             if (!initAndValidate(config)) {
-                System.out.println("Exiting w/ 0");
                 System.exit(0);
             }
             result = inspector.getBdio();
         } catch (HelpGenerationException helpGenerationException) {
-            String msg = String.format("Error generating help: %s", helpGenerationException.getMessage());
-            logger.error(msg);
-            logStackTraceIfDebug(helpGenerationException);
+            String msg = logException(helpGenerationException, "Error generating help: %s");
             result = Result.createResultFailure(msg);
+        } catch (InterruptedException ie) {
+            logException(ie, "Error inspecting image: %s");
+            throw ie;
         } catch (Exception e) {
-            String msg = String.format("Error inspecting image: %s", e.getMessage());
-            logger.error(msg);
-            logStackTraceIfDebug(e);
+            String msg = logException(e, "Error inspecting image: %s");
             result = Result.createResultFailure(msg);
         }
         File resultsFile = new File(output.getFinalOutputDir(), programPaths.getDockerInspectorResultsFilename());
@@ -109,6 +102,13 @@ public class DockerInspector implements ApplicationRunner {
         int returnCode = result.getReturnCode();
         logger.info(String.format("Returning %d", returnCode));
         System.exit(returnCode);
+    }
+
+    private String logException(Exception e, String s) {
+        String msg = String.format(s, e.getMessage());
+        logger.error(msg);
+        logStackTraceIfDebug(e);
+        return msg;
     }
 
     private void logStackTraceIfDebug(Exception e) {
