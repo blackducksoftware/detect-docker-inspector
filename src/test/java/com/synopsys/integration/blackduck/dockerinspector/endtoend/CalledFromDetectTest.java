@@ -20,6 +20,8 @@ import com.synopsys.integration.exception.IntegrationException;
 
 @Tag("integration")
 public class CalledFromDetectTest {
+    // TODO change this
+    private static final int DETECT_MAJOR_VERSION = 7;
     private static final String TEXT_PRECEDING_BDIO_FILE_DIR_PATH = "BDIO Generated: ";
     private static ProgramVersion programVersion;
     private static File executionDir;
@@ -38,7 +40,7 @@ public class CalledFromDetectTest {
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 
-        final String cmdGetDetectScriptString = "curl --insecure -s https://detect.synopsys.com/detect7.sh";
+        String cmdGetDetectScriptString = String.format("curl --insecure -s https://detect.synopsys.com/detect%d.sh", DETECT_MAJOR_VERSION);
         String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);

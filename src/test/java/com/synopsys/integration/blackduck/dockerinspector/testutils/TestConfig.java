@@ -27,6 +27,7 @@ public class TestConfig {
     private long minContainerFileSystemFileSize;
     private long maxContainerFileSystemFileSize;
     private boolean appOnlyMode;
+    private String callerName;
 
     public enum Mode {
         NO_SERVICE_START,
@@ -57,7 +58,8 @@ public class TestConfig {
         File targetTarInSharedDir,
         long minContainerFileSystemFileSize,
         long maxContainerFileSystemFileSize,
-        boolean appOnlyMode
+        boolean appOnlyMode,
+        String callerName
     ) {
         this.mode = mode;
         this.inspectTargetImageRepoTag = inspectTargetImageRepoTag;
@@ -81,6 +83,7 @@ public class TestConfig {
         this.minContainerFileSystemFileSize = minContainerFileSystemFileSize;
         this.maxContainerFileSystemFileSize = maxContainerFileSystemFileSize;
         this.appOnlyMode = appOnlyMode;
+        this.callerName = callerName;
     }
 
     public Mode getMode() {
@@ -169,6 +172,10 @@ public class TestConfig {
 
     public boolean isAppOnlyMode() {
         return appOnlyMode;
+    }
+
+    public String getCallerName() {
+        return callerName;
     }
 
     public void setInspectTargetImageRepoTag(String inspectTargetImageRepoTag) {

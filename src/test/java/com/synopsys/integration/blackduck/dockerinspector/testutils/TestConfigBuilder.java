@@ -29,9 +29,15 @@ public class TestConfigBuilder {
     private long minContainerFileSystemFileSize;
     private long maxContainerFileSystemFileSize;
     private boolean appOnlyMode;
+    private String callerName;
 
     public TestConfigBuilder setAppOnlyMode(boolean appOnlyMode) {
         this.appOnlyMode = appOnlyMode;
+        return this;
+    }
+
+    public TestConfigBuilder setCallerName(String callerName) {
+        this.callerName = callerName;
         return this;
     }
 
@@ -148,7 +154,7 @@ public class TestConfigBuilder {
             outputBomMustContainComponentPrefix, outputBomMustNotContainComponentPrefix,
             outputBomMustContainExternalSystemTypeId, codelocationName, additionalArgs, env, testSquashedImageGeneration,
             outputContainerFileSystemFile, outputSquashedImageFile, targetTarInSharedDir, minContainerFileSystemFileSize, maxContainerFileSystemFileSize,
-            appOnlyMode
+            appOnlyMode, callerName
         );
     }
 }

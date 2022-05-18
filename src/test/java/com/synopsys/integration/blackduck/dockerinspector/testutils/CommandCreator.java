@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 public class CommandCreator {
@@ -18,7 +20,9 @@ public class CommandCreator {
 
     public List<String> createCmd(
         TestConfig.Mode mode, String inspectTargetArg, String repo, String tag,
-        String codelocationName, List<String> additionalArgs
+        String codelocationName,
+        String callerName,
+        List<String> additionalArgs
     ) {
         List<String> cmd = new ArrayList<>();
         cmd.add("java");
@@ -37,6 +41,9 @@ public class CommandCreator {
         cmd.add("--logging.level.com.synopsys=DEBUG");
         cmd.add("--service.timeout=800000");
         cmd.add("--command.timeout=800000");
+        if (StringUtils.isNotBlank(callerName)) {
+            cmd.add(String.format("--caller.name=%s", callerName));
+        }
         if (mode == TestConfig.Mode.SPECIFY_II_DETAILS) {
             // --imageinspector.service.start=true is left to default (true)
             cmd.add(String.format("--imageinspector.service.port.alpine=%d", START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE));

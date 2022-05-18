@@ -55,7 +55,7 @@ public class IntegrationTestRunner {
         }
 
         List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
-            testConfig.getAdditionalArgs()
+            testConfig.getCallerName(), testConfig.getAdditionalArgs()
         );
 
         System.out.println(String.format("Running end to end test on %s with command %s", testConfig.getInspectTargetImageRepoTag(), cmd.toString()));
@@ -170,7 +170,7 @@ public class IntegrationTestRunner {
         TestUtils.ensureFileDoesNotExist(actualBdio);
 
         List<String> cmd = commandCreator.createCmd(testConfig.getMode(), inspectTargetArg, testConfig.getTargetRepo(), testConfig.getTargetTag(), testConfig.getCodelocationName(),
-            testConfig.getAdditionalArgs()
+            testConfig.getCallerName(), testConfig.getAdditionalArgs()
         );
         System.out.printf("Running end to end test on %s with command %s\n", targetTarFile, cmd.toString());
         TestUtils.execCmd(String.join(" ", cmd), 240000L, true, testConfig.getEnv());
