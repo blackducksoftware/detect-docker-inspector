@@ -9,10 +9,6 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -21,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
@@ -31,17 +26,12 @@ public class HelpReader {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private ProgramVersion programVersion;
-
-    @Autowired
     private Config config;
 
     private Configuration freemarkerConfig = null;
-    private Map<String, Object> variableData;
 
     private void init() throws IOException {
         ensureConfigInitialized();
-        ensureVariableDataLoaded();
     }
 
     private void ensureConfigInitialized() throws IOException {
@@ -58,20 +48,6 @@ public class HelpReader {
                 freemarkerConfig.setDirectoryForTemplateLoading(contentDir);
             } else {
                 freemarkerConfig.setClassForTemplateLoading(this.getClass(), "/help/content");
-            }
-        }
-    }
-
-    private void ensureVariableDataLoaded() throws IOException {
-        if (variableData == null) {
-            variableData = new HashMap<>();
-            variableData.put("program_version", programVersion.getProgramVersion());
-            Properties helpProperties = new Properties();
-            try (InputStream propFileInputStream = this.getClass().getResourceAsStream("/help/data/help.properties")) {
-                helpProperties.load(propFileInputStream);
-            }
-            for (String propertyName : helpProperties.stringPropertyNames()) {
-                variableData.put(propertyName, helpProperties.getProperty(propertyName));
             }
         }
     }
