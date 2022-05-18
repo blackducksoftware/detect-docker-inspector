@@ -1,5 +1,4 @@
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
     ext {
@@ -111,7 +110,7 @@ task docsPrep() {
 
 task generateHelpMarkdown(type: Exec, dependsOn: [docsPrep, bootJar]) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${createArtifactName()}", "--help", "all", "--help.output.path=docs/generated"
+    commandLine "java", "-jar", "${createArtifactName()}", "--help", "--help.output.path=docs/generated"
 }
 
 def outputPath = "docs/generated"
@@ -191,14 +190,14 @@ task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir, createTestDockerfile]) {
-    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
-          "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
+               "${buildDir}/images/test/centos_minus_vim_plus_bacula"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage]) {
     outputs.files file("${buildDir}/images/test/centos_minus_vim_plus_bacula.tar")
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",   \
-          "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/centos_minus_vim_plus_bacula.tar",        \
+               "blackducksoftware/centos_minus_vim_plus_bacula:1.0"
 }
 
 task createWhTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
@@ -253,8 +252,8 @@ task buildAlpine36TestDockerTarfile(type: Exec, dependsOn: [pullAlpine36, create
 }
 
 task buildAggTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage, buildWhTestDockerImage]) {
-    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",   \
-          "blackducksoftware/whiteouttest:1.0"
+    commandLine "docker", "save", "-o", "${buildDir}/images/test/aggregated.tar", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
+               "blackducksoftware/whiteouttest:1.0"
 }
 
 build.dependsOn generateHelpMarkdown
@@ -271,8 +270,8 @@ task checkVersion() {
     }
 }
 
-task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,   \
-          buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
+task buildTestTarfiles(dependsOn: [buildTestDockerTarfile, buildWhTestDockerTarfile, buildAggTestDockerTarfile,        \
+               buildAlpineTestDockerTarfile, buildAlpine36TestDockerTarfile, buildUbuntuTestDockerTarfile]) {}
 
 task testPrep(dependsOn: [docs, buildTestTarfiles]) {
     doLast {

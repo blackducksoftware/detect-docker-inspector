@@ -9,11 +9,8 @@ package com.synopsys.integration.blackduck.dockerinspector;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +33,6 @@ import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientI
 import com.synopsys.integration.blackduck.dockerinspector.output.Output;
 import com.synopsys.integration.blackduck.dockerinspector.output.Result;
 import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
-import com.synopsys.integration.blackduck.dockerinspector.programarguments.ArgumentParser;
 import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
@@ -134,15 +130,6 @@ public class DockerInspector implements ApplicationRunner {
         return false;
     }
 
-    private String getHelpTopics() {
-        ArgumentParser argumentParser = new ArgumentParser(applicationArguments.getSourceArgs());
-        String argFollowingHelpFlag = argumentParser.findValueForCommand("-h", "--help");
-        if (StringUtils.isBlank(argFollowingHelpFlag) || argFollowingHelpFlag.startsWith("-")) {
-            return null;
-        }
-        return argFollowingHelpFlag;
-    }
-
     private boolean contains(String[] stringsToSearch, String targetString) {
         for (String stringToTest : stringsToSearch) {
             if (targetString.equals(stringToTest)) {
@@ -176,27 +163,12 @@ public class DockerInspector implements ApplicationRunner {
 
     private void provideHelp(Config config) throws FileNotFoundException, HelpGenerationException {
         String givenHelpOutputFilePath = config.getHelpOutputFilePath();
-        if (StringUtils.isBlank(givenHelpOutputFilePath)) {
-            helpWriter.concatinateContentToPrintStream(System.out, getHelpTopics());
-        } else {
-            File helpOutputFile = new File(givenHelpOutputFilePath);
-            if ((!helpOutputFile.isDirectory())) {
-                try (PrintStream helpPrintStream = new PrintStream(new FileOutputStream(helpOutputFile))) {
-                    helpWriter.concatinateContentToPrintStream(helpPrintStream, getHelpTopics());
-                }
-            } else {
-                helpWriter.writeIndividualFilesToDir(new File(givenHelpOutputFilePath), getHelpTopics());
-            }
+        File helpOutputFile = new File(givenHelpOutputFilePath);
+        if ((!helpOutputFile.isDirectory())) {
+            throw new HelpGenerationException(String.format("%s is not a directory", helpOutputFile.getAbsolutePath()));
         }
+        helpWriter.writePropertiesMarkdownToDir(helpOutputFile);
         System.out.println("Finished provideHelp()");
-    }
-
-    private String deriveDockerEngineVersion(Config config) {
-        String dockerEngineVersion = "None";
-        if (StringUtils.isBlank(config.getImageInspectorUrl())) {
-            dockerEngineVersion = dockerClientManager.getDockerEngineVersion();
-        }
-        return dockerEngineVersion;
     }
 
     private void initImageName() {

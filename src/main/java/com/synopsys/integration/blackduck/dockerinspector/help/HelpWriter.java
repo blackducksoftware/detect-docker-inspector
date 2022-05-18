@@ -10,7 +10,6 @@ package com.synopsys.integration.blackduck.dockerinspector.help;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,56 +17,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
-import com.synopsys.integration.exception.IntegrationException;
 
 @Component
 public class HelpWriter {
+    public static final String PROPERTIES_TOPIC_NAME = "advanced-properties";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private HelpText helpText;
 
-    @Autowired
-    private HelpTopicParser helpTopicParser;
-
-    public void writeIndividualFilesToDir(final File outputDir, final String helpTopicNames) throws HelpGenerationException {
+    public void writePropertiesMarkdownToDir(File outputDir) throws HelpGenerationException {
         try {
-            final List<String> helpTopics = getTopicList(helpTopicNames);
-            for (final String helpTopicName : helpTopics) {
-                final String markdownFilename = deriveMarkdownFilename(helpTopicName);
-                try (final PrintStream printStreamMarkdown = derivePrintStream(outputDir, markdownFilename)) {
-                    printStreamMarkdown.println(helpText.getMarkdownForTopic(helpTopicName));
-                }
+            String markdownFilename = deriveMarkdownFilename(PROPERTIES_TOPIC_NAME);
+            try (PrintStream printStreamMarkdown = derivePrintStream(outputDir, markdownFilename)) {
+                printStreamMarkdown.println(helpText.getMarkdownForProperties());
             }
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
     }
 
-    public void concatinateContentToPrintStream(final PrintStream printStream, final String helpTopicNames) throws HelpGenerationException {
+    public void concatinateContentToPrintStream(PrintStream printStream) throws HelpGenerationException {
         try {
-            final List<String> helpTopics = getTopicList(helpTopicNames);
-            for (final String helpTopicName : helpTopics) {
-                printStream.println(helpText.getMarkdownForTopic(helpTopicName));
-            }
+            printStream.println(helpText.getMarkdownForProperties());
         } catch (Exception e) {
             throw new HelpGenerationException(String.format("Error generating help: %s", e.getMessage()), e);
         }
     }
 
-    private List<String> getTopicList(final String helpTopicNames) {
-        final String expandedTopicNames = helpTopicParser.translateGivenTopicNames(helpTopicNames);
-        return helpTopicParser.deriveHelpTopicList(expandedTopicNames);
-    }
-
-    private String deriveMarkdownFilename(final String helpTopicName) {
+    private String deriveMarkdownFilename(String helpTopicName) {
         return String.format("%s.md", helpTopicName);
     }
 
-    private PrintStream derivePrintStream(final File outputDir, final String markdownFilename) throws FileNotFoundException {
-        final File finalHelpOutputFile = new File(outputDir, markdownFilename);
+    private PrintStream derivePrintStream(File outputDir, String markdownFilename) throws FileNotFoundException {
+        File finalHelpOutputFile = new File(outputDir, markdownFilename);
         logger.info(String.format("Writing help output to: %s", finalHelpOutputFile.getAbsolutePath()));
-        final PrintStream printStream = new PrintStream(finalHelpOutputFile);
+        PrintStream printStream = new PrintStream(finalHelpOutputFile);
         return printStream;
     }
 }
