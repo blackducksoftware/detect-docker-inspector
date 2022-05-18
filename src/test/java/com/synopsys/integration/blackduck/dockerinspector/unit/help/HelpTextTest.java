@@ -14,27 +14,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.synopsys.integration.blackduck.dockerinspector.config.Config;
 import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpReader;
 import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 @ExtendWith(SpringExtension.class)
-public class HelpTextTest {
+class HelpTextTest {
 
     @Mock
     private Config config;
-
-    @Mock
-    private ProgramVersion programVersion;
-
-    @Mock
-    private HelpReader helpReader;
 
     @InjectMocks
     private HelpText helpText;
 
     @Test
-    public void testProperties() throws IllegalArgumentException {
+    void testProperties() throws IllegalArgumentException {
         SortedSet<DockerInspectorOption> configOptions = new TreeSet<>();
         configOptions.add(new DockerInspectorOption("blackduck.url", "testBlackDuckUrl", "Black Duck URL", String.class, "", false, "deprecationMessage"));
         Mockito.when(config.getPublicConfigOptions()).thenReturn(configOptions);
