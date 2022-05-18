@@ -140,15 +140,14 @@ public class DockerInspector implements ApplicationRunner {
     }
 
     private boolean initAndValidate(Config config) throws IntegrationException, FileNotFoundException {
-        if (!DETECT_CALLER_NAME.equals(config.getCallerName())) {
-            logger.error("*** Running Docker Inspector as a standalone utility is no longer supported. You must invoke Docker Inspector by running Synopsys Detect. ***");
-        }
-
-        logger.info(String.format("Black Duck Docker Inspector %s", programVersion.getProgramVersion()));
+        logger.info(String.format("Detect Docker Inspector %s", programVersion.getProgramVersion()));
         logger.debug(String.format("Java version: %s", System.getProperty("java.version")));
         if (helpInvoked()) {
             provideHelp(config);
             return false;
+        }
+        if (!DETECT_CALLER_NAME.equals(config.getCallerName())) {
+            throw new IntegrationException("Running Docker Inspector as a standalone utility is no longer supported. You must invoke Docker Inspector by running Synopsys Detect.");
         }
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));
