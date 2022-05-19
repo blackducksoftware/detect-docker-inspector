@@ -91,40 +91,23 @@ task produceFinalZip(type: Zip, dependsOn: [build, writeVersionToPropertiesFile]
     }
 }
 
-task docsGeneratedClean(type: Delete) {
-    delete 'docs/generated'
-}
+def generatedDocPath = "docs/generated"
 
-task docsSiteClean(type: Delete) {
-    delete 'docs/site'
+task docsClean(type: Delete) {
+    delete "${generatedDocPath}"
 }
-
-task docsClean(dependsOn: [docsSiteClean, docsGeneratedClean]) {}
 
 task docsPrep() {
     doLast {
-        project.file('docs/generated').mkdirs()
+        project.file("${generatedDocPath}").mkdirs()
     }
 }
 
-task generateHelpMarkdown(type: Exec, dependsOn: [docsPrep, bootJar]) {
+task docs(type: Exec, dependsOn: [docsPrep, bootJar]) {
     ignoreExitValue true
-    commandLine "java", "-jar", "${createArtifactName()}", "--help", "--help.output.path=docs/generated"
+    commandLine "java", "-jar", "${createArtifactName()}", "--help", "--help.output.path=${generatedDocPath}"
 }
 
-def outputPath = "docs/generated"
-def templatePath = "docs/templates"
-def staticPath = "docs/static"
-
-task docs(dependsOn: [generateHelpMarkdown]) {
-    doLast {
-        def output = file(outputPath)
-        exec {
-            commandLine 'mkdocs', 'build'
-            workingDir "docs"
-        }
-    }
-}
 
 task servedocs() {
     dependsOn docs
@@ -255,7 +238,7 @@ task buildAggTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buil
                "blackducksoftware/whiteouttest:1.0"
 }
 
-build.dependsOn generateHelpMarkdown
+build.dependsOn docs
 clean.dependsOn docsClean
 compileJava.dependsOn writeVersionToPropertiesFile
 
@@ -279,7 +262,7 @@ task testPrep(dependsOn: [docs, buildTestTarfiles]) {
     }
 }
 
-task cleanExtras(type: Delete, dependsOn: docsGeneratedClean) {
+task cleanExtras(type: Delete, dependsOn: docsClean) {
     delete 'test', 'out'
 }
 
