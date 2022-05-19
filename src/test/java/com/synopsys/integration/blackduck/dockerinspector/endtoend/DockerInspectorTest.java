@@ -128,7 +128,7 @@ public class DockerInspectorTest {
         final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
 
         TestConfig testConfig = new TestConfigBuilder()
-            // TODO maybe just hard code caller name in test config builder
+            // TODO make CALLER_NAME_DETECT the overridable default for caller name
             .setCallerName(CALLER_NAME_DETECT)
             .setTarFilePath("build/images/test/ubuntu1404.tar")
             .setPortOnHost(portOnHost)
