@@ -87,6 +87,7 @@ public class ImageCleanupTest {
         fullCmd.add("--cleanup.target.image=true");
         fullCmd.add(String.format("--working.dir.path=%s", workingDirPath));
         fullCmd.add(String.format("--docker.image=%s", TARGET_IMAGE_NAME, TARGET_IMAGE_TAG));
+        fullCmd.add("--caller.name=Detect");
         String log = runCommand(fullCmd, true);
         System.out.println(log);
         Thread.sleep(10000L); // give docker a few seconds
