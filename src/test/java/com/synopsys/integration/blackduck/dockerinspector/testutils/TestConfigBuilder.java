@@ -7,6 +7,7 @@ import java.util.Map;
 import com.synopsys.integration.exception.IntegrationException;
 
 public class TestConfigBuilder {
+    public static final String CALLER_NAME_DETECT = "Detect";
     private TestConfig.Mode mode = TestConfig.Mode.DEFAULT;
     private String inspectTargetImageRepoTag;
     private String inspectTargetImageId;
@@ -29,7 +30,7 @@ public class TestConfigBuilder {
     private long minContainerFileSystemFileSize;
     private long maxContainerFileSystemFileSize;
     private boolean appOnlyMode;
-    private String callerName;
+    private String callerName = CALLER_NAME_DETECT;
 
     public TestConfigBuilder setAppOnlyMode(boolean appOnlyMode) {
         this.appOnlyMode = appOnlyMode;
