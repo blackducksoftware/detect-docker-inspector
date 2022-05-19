@@ -63,7 +63,6 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
@@ -177,13 +176,13 @@ public class DockerClientManager {
         try {
             pull.exec(new PullImageResultCallback()).awaitCompletion();
         } catch (NotFoundException e) {
-            throw new BlackDuckIntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
+            throw new IntegrationException(String.format("Pull failed: Image %s:%s not found. Please check the image name/tag. Error: %s", imageName, tagName, e.getMessage()), e);
         }
         Optional<Image> justPulledImage = getLocalImage(dockerClient, imageName, tagName);
         if (!justPulledImage.isPresent()) {
             String msg = String.format("Pulled image %s:%s not found in image list.", imageName, tagName);
             logger.error(msg);
-            throw new BlackDuckIntegrationException(msg);
+            throw new IntegrationException(msg);
         }
         return justPulledImage.get().getId();
     }
@@ -243,7 +242,7 @@ public class DockerClientManager {
             .withExposedPorts(exposedPort)
             .withHostConfig(hostConfig)
             .withCmd(cmd.split(" "))) {
-            
+
             CreateContainerResponse containerResponse = createContainerCmd.exec();
             String containerId = containerResponse.getId();
 
@@ -307,7 +306,7 @@ public class DockerClientManager {
         } else if (StringUtils.isNotBlank(config.getDockerImageRepo())) {
             finalDockerTarfile = getTarFileFromDockerImage(config.getDockerImageRepo(), config.getDockerImageTag(), imageTarDirectory);
         } else {
-            throw new BlackDuckIntegrationException("You must specify a docker image");
+            throw new IntegrationException("You must specify a docker image");
         }
         return finalDockerTarfile;
     }
@@ -489,7 +488,7 @@ public class DockerClientManager {
                 return container;
             }
         }
-        throw new BlackDuckIntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
+        throw new IntegrationException(String.format("No running container found with app = %s, os = %s", targetAppName, targetInspectorOs.name()));
     }
 
     private Container getRunningContainerByContainerName(DockerClient dockerClient, String extractorContainerName) {

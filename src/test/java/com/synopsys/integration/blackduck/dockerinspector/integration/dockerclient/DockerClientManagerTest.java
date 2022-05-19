@@ -27,7 +27,6 @@ import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
 import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
 import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.exception.BlackDuckIntegrationException;
 import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
 import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
 import com.synopsys.integration.exception.IntegrationException;
@@ -146,7 +145,7 @@ public class DockerClientManagerTest {
         boolean threwException = false;
         try {
             dockerClientManager.pullImageByPlatform(repo, tag, platform);
-        } catch (BlackDuckIntegrationException | BadRequestException | DockerClientException | InternalServerErrorException e) {
+        } catch (IntegrationException | BadRequestException | DockerClientException | InternalServerErrorException e) {
             threwException = true;
         }
         assertEquals(shouldThrowException, threwException);
