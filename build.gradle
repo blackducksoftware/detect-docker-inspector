@@ -4,7 +4,6 @@ buildscript {
     ext {
         springBootVersion = '2.6.6'
         dockerJavaVersion = '3.2.13'
-        //blackDuckCommonVersion = '62.0.1'
         junitPlatformCustomTestTags = 'docker, battery'
         javaTargetCompatibility = 8
         javaSourceCompatibility = 8
@@ -302,10 +301,8 @@ artifactory {
 }
 
 dependencies {
-    //implementation "com.synopsys.integration:blackduck-common:${blackDuckCommonVersion}"
     implementation "com.synopsys.integration:integration-rest:10.3.3"
-    //implementation 'net.minidev:json-smart:2.4.7'
-    implementation 'com.synopsys.integration:integration-bdio:22.1.1'
+    implementation 'com.synopsys.integration:integration-bdio:26.0.3'
     implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.2'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
