@@ -34,7 +34,7 @@ public class CalledFromDetectTest {
         programVersion = new ProgramVersion();
         programVersion.init();
         executionDir = Files.createTempDir();
-        executionDir.deleteOnExit();
+        FileUtils.forceDeleteOnExit(executionDir);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class CalledFromDetectTest {
 
         File detectOutputFile = File.createTempFile("detectOutput", ".txt");
         detectOutputFile.setWritable(true);
-        detectScriptFile.deleteOnExit();
+        detectOutputFile.deleteOnExit();
 
         StringBuffer sb = new StringBuffer();
         sb.append("#\n");
@@ -70,7 +70,7 @@ public class CalledFromDetectTest {
         System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
         File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
         detectWrapperScriptFile.setExecutable(true);
-        detectScriptFile.deleteOnExit();
+        detectWrapperScriptFile.deleteOnExit();
         System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
         Map<String, String> env = new HashMap<>(1);
