@@ -284,7 +284,7 @@ artifactory {
 }
 
 dependencies {
-    implementation "com.synopsys.integration:integration-rest:10.3.3"
+    implementation "com.synopsys.integration:integration-rest:10.3.6"
     implementation 'com.synopsys.integration:hub-imageinspector-lib:14.1.3'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
