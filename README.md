@@ -10,7 +10,7 @@ Detect Docker Inspector is invoked by running Synopsys Detect.
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## User documentation ##
-The documentation for Synopsys Detect can be found [here](https://community.synopsys.com/s/document-item?bundleId=integrations-detect&topicId=introduction.html).
+The documentation for Synopsys Detect can be found [here](https://sig-product-docs.synopsys.com/bundle/integrations-detect).
 
 ## Getting help
 
