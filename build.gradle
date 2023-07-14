@@ -292,6 +292,7 @@ dependencies {
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.yaml:snakeyaml:2.0'
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
