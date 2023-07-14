@@ -2,7 +2,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 buildscript {
     ext {
-        springBootVersion = '2.6.6'
+        springBootVersion = '2.7.12'
         dockerJavaVersion = '3.2.13'
         junitPlatformCustomTestTags = 'docker, battery'
         javaTargetCompatibility = 8
