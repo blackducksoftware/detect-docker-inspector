@@ -30,6 +30,7 @@ public class TestUtils {
         if (!temp.mkdir()) {
             throw new IOException("Could not create temp directory: " + temp.getAbsolutePath());
         }
+        FileUtils.forceDeleteOnExit(temp);
         return temp;
     }
 
