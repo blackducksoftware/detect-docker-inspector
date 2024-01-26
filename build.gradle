@@ -307,7 +307,7 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.2.2-SNAPSHOT'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.2.3-SNAPSHOT'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
