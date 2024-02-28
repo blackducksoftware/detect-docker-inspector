@@ -26,7 +26,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.1.0"
+project.ext.inspectorImageVersion = "5.1.1"
 
 version = '10.1.1-SNAPSHOT'
 
@@ -34,6 +34,28 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.synopsys.integration.solution'
+
+final def externalRepoHost = "https://sig-repo.synopsys.com"
+final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
+
+repositories {
+    println "Checking if environment property SNPS_INTERNAL_ARTIFACTORY is configured: ${internalRepoHost}"
+    maven {
+        url = uri("${internalRepoHost}/artifactory/bds-integrations-release")
+    }
+    maven {
+        url = uri("${internalRepoHost}/artifactory/bds-integrations-snapshot")
+    }
+    maven {
+        url = uri("${internalRepoHost}/artifactory/bds-integration-placeholder-release")
+    }
+    maven {
+        url = uri("${externalRepoHost}/artifactory/bds-integration-placeholder-release")
+    }
+    maven {
+        url "${externalRepoHost}/bds-bdio-release"
+    }
+}
 
 apply from: 'airgap.gradle'
 
@@ -285,7 +307,7 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.2.0'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.2.1'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
