@@ -26,7 +26,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.0"
+project.ext.inspectorImageVersion = "5.2.1"
 
 version = '10.2.0-SNAPSHOT'
 
@@ -307,7 +307,7 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.0'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.1'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
