@@ -9,7 +9,10 @@ buildscript {
         javaSourceCompatibility = 8
     }
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
-    apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle", to: buildscript
+    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
+
+    dependencies { classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}" }
+    
     // TODO don't seem to need this repositories
     repositories {
         gradlePluginPortal()
@@ -26,7 +29,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.2"
+project.ext.inspectorImageVersion = "5.2.4"
 
 version = '10.2.1-SNAPSHOT'
 
@@ -307,7 +310,7 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.2'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.4'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
