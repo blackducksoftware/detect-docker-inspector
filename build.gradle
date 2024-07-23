@@ -9,7 +9,10 @@ buildscript {
         javaSourceCompatibility = 8
     }
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
-    apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle", to: buildscript
+    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
+
+    dependencies { classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}" }
+    
     // TODO don't seem to need this repositories
     repositories {
         gradlePluginPortal()
@@ -26,7 +29,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.2"
+project.ext.inspectorImageVersion = "5.2.5"
 
 version = '10.2.1-SNAPSHOT'
 
@@ -193,9 +196,9 @@ task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
         bacula-console-5.2.13-23.1.el7'
 }
 
-task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir, createTestDockerfile]) {
+task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
-               "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+               "src/test/resources"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage]) {
@@ -307,8 +310,8 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.2'
-    implementation 'ch.qos.logback:logback-classic:1.2.11'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.5'
+    implementation 'ch.qos.logback:logback-classic:1.2.13'
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
