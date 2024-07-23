@@ -459,7 +459,7 @@ public class DockerInspectorTest {
             .setTarFilePath("build/images/test/alpine.tar")
             .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU)
             .setRequireBdioMatch(false)
-            .setOutputBomMustContainExternalSystemTypeId("@Testdistro")
+            .setOutputBomMustContainExternalSystemTypeId("@testdistro")
             .setAdditionalArgs(additionalArgs)
             .setCodelocationName("alpine_latest_APK")
             .build();
