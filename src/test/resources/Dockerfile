@@ -1,4 +1,4 @@
-FROM centos:7.3.1611
+FROM centos@sha256:773bb32cbd1d171da7df52de8d7b731320748707b821bdbabb885d6eda894e87
 ENV LANG=en_US.UTF-8
 
 RUN rm -f /etc/yum.repos.d/CentOS-Base.repo
