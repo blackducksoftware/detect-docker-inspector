@@ -198,7 +198,7 @@ task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
-               "-f", "CentOS7Test.Dockerfile", "src/test/resources"
+               "src/test/resources"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage]) {
