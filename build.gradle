@@ -196,9 +196,9 @@ task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
         bacula-console-5.2.13-23.1.el7'
 }
 
-task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir, createTestDockerfile]) {
+task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir]) {
     commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
-               "${buildDir}/images/test/centos_minus_vim_plus_bacula"
+               "-f", "CentOS7Test.Dockerfile", "src/test/resources"
 }
 
 task buildTestDockerTarfile(type: Exec, dependsOn: [createTestImagesDir, buildTestDockerImage]) {
