@@ -320,6 +320,12 @@ dependencies {
     implementation 'org.yaml:snakeyaml:2.0'
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
 
+    constraints {
+        implementation('ch.qos.logback:logback-core:1.2.13') {
+            because 'previous version has a vulnerability'
+        }
+    }
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.fabric8:kubernetes-client:3.1.8'
     testImplementation 'io.fabric8:kubernetes-model:2.0.8'
