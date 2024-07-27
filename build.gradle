@@ -29,7 +29,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.6"
+project.ext.inspectorImageVersion = "5.2.7-20240726.221635"
 
 version = '10.2.1-SNAPSHOT'
 
