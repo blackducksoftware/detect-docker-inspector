@@ -32,7 +32,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.7-SNAPSHOT"
+project.ext.inspectorImageVersion = "5.2.7"
 
 version = '10.2.1-SNAPSHOT'
 
@@ -313,8 +313,13 @@ artifactory {
 
 dependencies {
     implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.2'
+    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.7'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
+    constraints {
+        implementation('ch.qos.logback:logback-core:1.2.13') {
+            because 'previous version has a vulnerability'
+        }
+    }
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
@@ -322,16 +327,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.yaml:snakeyaml:2.0'
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
-
-    constraints {
-        implementation('ch.qos.logback:logback-core:1.2.13') {
-            because 'previous version has a vulnerability'
-        }
-
-        implementation('ch.qos.logback:logback-classic:1.2.13') {
-            because 'previous version has a vulnerability'
-        }
-    }
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.fabric8:kubernetes-client:3.1.8'
