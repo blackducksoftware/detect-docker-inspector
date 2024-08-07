@@ -42,7 +42,7 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.synopsys.integration.solution'
 
 final def externalRepoHost = "https://sig-repo.synopsys.com"
-final def internalRepoHost = "https://artifactory.internal.synopsys.com"//System.getenv('SNPS_INTERNAL_ARTIFACTORY')
+final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
 
 repositories {
     println "Checking if environment property SNPS_INTERNAL_ARTIFACTORY is configured: ${internalRepoHost}"
