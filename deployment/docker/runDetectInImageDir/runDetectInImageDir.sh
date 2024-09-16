@@ -22,7 +22,7 @@ cd image
 docker build -t mavenproject:1 .
 cd ..
 
-curl -O https://detect.synopsys.com/detect.sh
+curl -O https://detect.blackduck.com/detect.sh
 chmod +x detect.sh
 ./detect.sh --blackduck.offline.mode=true --detect.docker.image=mavenproject:1 --detect.docker.passthrough.output.path=/tmp/output --detect.tools.excluded=SIGNATURE_SCAN,POLARIS
 rm -rf containerfilesystem

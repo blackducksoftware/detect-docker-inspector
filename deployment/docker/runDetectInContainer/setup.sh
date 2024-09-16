@@ -103,7 +103,7 @@ done
 
 cd image
 curl -O https://raw.githubusercontent.com/blackducksoftware/blackduck-docker-inspector/master/deployment/docker/runDetectInContainer/image/Dockerfile
-curl -O https://detect.synopsys.com/detect.sh
+curl -O https://detect.blackduck.com/detect.sh
 chmod +x detect.sh
 docker build -t detect:1.0 .
 cd ..
@@ -124,6 +124,6 @@ chmod a+r ${localSharedDirPath}/target/ubuntu.tar
 echo "Next steps:"
 echo "docker attach detect"
 echo "cd /opt/blackduck/detect/"
-echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/alpine.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
-echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/centos.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
-echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/ubuntu.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.com.synopsys.integration=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
+echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/alpine.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.detect=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
+echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/centos.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.detect=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
+echo "./detect.sh --blackduck.offline.mode=true --detect.tools.excluded=SIGNATURE_SCAN,POLARIS --detect.docker.tar=/opt/blackduck/blackduck-imageinspector/shared/target/ubuntu.tar --detect.docker.path.required=false --detect.docker.passthrough.imageinspector.service.url=http://localhost:9002 --detect.docker.passthrough.imageinspector.service.start=false --logging.level.detect=INFO --detect.docker.passthrough.shared.dir.path.local=/opt/blackduck/blackduck-imageinspector/shared/"
