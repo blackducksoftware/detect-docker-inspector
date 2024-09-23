@@ -30,9 +30,9 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.7"
+project.ext.inspectorImageVersion = "6.0.0"
 
-version = '10.2.1'
+version = '11.0.0-SNAPSHOT'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -311,7 +311,7 @@ artifactory {
 
 dependencies {
     implementation "com.blackduck.integration:integration-rest:10.3.6"
-    implementation 'com.blackduck.integration:hub-imageinspector-lib:14.3.7'
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.0'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
