@@ -147,7 +147,7 @@ public class DockerInspector implements ApplicationRunner {
             return false;
         }
         if (!DETECT_CALLER_NAME.equals(config.getCallerName())) {
-            throw new IntegrationException("Running Docker Inspector as a standalone utility is no longer supported. You must invoke Docker Inspector by running Synopsys Detect.");
+            throw new IntegrationException("Running Docker Inspector as a standalone utility is no longer supported. You must invoke Docker Inspector by running Detect.");
         }
         dockerInspectorSystemProperties.augmentSystemProperties(config.getSystemPropertiesPath());
         logger.debug(String.format("running from dir: %s", System.getProperty("user.dir")));

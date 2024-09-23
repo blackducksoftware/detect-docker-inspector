@@ -23,6 +23,6 @@ dependencies {
     implementation("com.blackduck.integration:common-gradle-plugin:${managedCgpVersion}") {
         exclude group: 'org.springframework', module: 'spring-core'
     }
-    implementation "com.blackduck.integration:integration-common:20.0.0"
+    implementation "com.blackduck.integration:integration-common:27.0.1"
     implementation gradleApi()
 }
