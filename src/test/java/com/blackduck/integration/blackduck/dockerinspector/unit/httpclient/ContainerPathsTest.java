@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.ContainerPaths;
+import com.blackduck.integration.blackduck.dockerinspector.ProcessId;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.ContainerPaths;
 
 class ContainerPathsTest {
 

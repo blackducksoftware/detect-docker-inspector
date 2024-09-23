@@ -16,9 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 
 @Component
 public class InspectorImages {

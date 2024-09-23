@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.output.BdioFilename;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.output.BdioFilename;
+import com.blackduck.integration.exception.IntegrationException;
 
 public class OutputFilenameTest {
 

@@ -11,8 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
+import com.blackduck.integration.exception.IntegrationException;
 
 public class DockerInspectorSystemPropertiesTest {
     private static File propertiesFile;

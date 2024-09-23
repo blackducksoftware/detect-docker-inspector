@@ -8,9 +8,9 @@
 package com.blackduck.integration.blackduck.dockerinspector.httpclient.connection;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.rest.client.IntHttpClient;
-import com.synopsys.integration.rest.proxy.ProxyInfo;
+import com.blackduck.integration.log.IntLogger;
+import com.blackduck.integration.rest.client.IntHttpClient;
+import com.blackduck.integration.rest.proxy.ProxyInfo;
 
 public class NonRedirectingIntHttpClient extends
     IntHttpClient {

@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.synopsys.integration.blackduck.imageinspector.image.common.archive.ImageLayerArchiveExtractor;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
+import com.blackduck.integration.blackduck.imageinspector.image.common.archive.ImageLayerArchiveExtractor;
+import com.blackduck.integration.blackduck.imageinspector.linux.FileOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

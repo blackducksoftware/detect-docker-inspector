@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
 
 @ExtendWith(SpringExtension.class)
 public class ContainerFilesystemFilenameTest {

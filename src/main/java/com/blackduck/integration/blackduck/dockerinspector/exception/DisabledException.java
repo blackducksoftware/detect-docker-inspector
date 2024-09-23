@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.blackduck.dockerinspector.exception;
 
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.exception.IntegrationException;
 
 public class DisabledException extends IntegrationException {
     private static final long serialVersionUID = -8752417293450489927L;

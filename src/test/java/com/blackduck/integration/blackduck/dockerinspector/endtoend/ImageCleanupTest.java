@@ -16,8 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.dockerinspector.testutils.TestUtils;
 
 @Tag("integration")
 public class ImageCleanupTest {

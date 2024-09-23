@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import com.synopsys.integration.rest.HttpMethod;
-import com.synopsys.integration.rest.HttpUrl;
+import com.blackduck.integration.rest.HttpMethod;
+import com.blackduck.integration.rest.HttpUrl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +24,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.dockerjava.api.model.Container;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.rest.RestConstants;
-import com.synopsys.integration.rest.client.IntHttpClient;
-import com.synopsys.integration.rest.exception.IntegrationRestException;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.exception.IntegrationException;
+import com.blackduck.integration.rest.RestConstants;
+import com.blackduck.integration.rest.client.IntHttpClient;
+import com.blackduck.integration.rest.exception.IntegrationRestException;
 
 @Component
 public class ImageInspectorClientStartServices extends ImageInspectorClient {

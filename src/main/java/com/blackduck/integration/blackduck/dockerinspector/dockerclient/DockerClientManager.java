@@ -58,17 +58,17 @@ import com.github.dockerjava.core.DockerClientImpl;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.transport.DockerHttpClient;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.exception.DisabledException;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
-import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
-import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.util.OperatingSystemType;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.exception.DisabledException;
+import com.blackduck.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.blackduck.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.blackduck.integration.blackduck.imageinspector.image.common.RepoTag;
+import com.blackduck.integration.blackduck.imageinspector.linux.FileOperations;
+import com.blackduck.integration.exception.IntegrationException;
+import com.blackduck.integration.util.OperatingSystemType;
 
 @Component
 public class DockerClientManager {

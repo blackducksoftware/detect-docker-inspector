@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.blackduck.integration.blackduck.dockerinspector.exception.HelpGenerationException;
 
 @Component
 public class HelpWriter {

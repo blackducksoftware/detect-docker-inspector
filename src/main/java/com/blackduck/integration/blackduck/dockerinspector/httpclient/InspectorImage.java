@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.blackduck.dockerinspector.httpclient;
 
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 
 public class InspectorImage {
     private final ImageInspectorOsEnum os;

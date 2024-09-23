@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.synopsys.integration.blackduck.dockerinspector.output.CompressedFile;
+import com.blackduck.integration.blackduck.dockerinspector.output.CompressedFile;
 
 public class CompressedFileTest {
     private static File fileToCompress;

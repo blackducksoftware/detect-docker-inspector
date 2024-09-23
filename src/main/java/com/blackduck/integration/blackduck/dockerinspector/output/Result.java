@@ -9,7 +9,7 @@ package com.blackduck.integration.blackduck.dockerinspector.output;
 
 import java.io.File;
 
-import com.synopsys.integration.util.Stringable;
+import com.blackduck.integration.util.Stringable;
 
 public class Result extends Stringable {
     private final Boolean succeeded;

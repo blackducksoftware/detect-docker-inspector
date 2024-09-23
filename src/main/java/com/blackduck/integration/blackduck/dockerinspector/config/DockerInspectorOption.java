@@ -10,7 +10,7 @@ package com.blackduck.integration.blackduck.dockerinspector.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.synopsys.integration.util.Stringable;
+import com.blackduck.integration.util.Stringable;
 
 public class DockerInspectorOption extends Stringable implements Comparable<DockerInspectorOption> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

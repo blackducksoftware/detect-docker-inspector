@@ -12,9 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorOption;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpText;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.DockerInspectorOption;
+import com.blackduck.integration.blackduck.dockerinspector.help.HelpText;
 
 @ExtendWith(SpringExtension.class)
 class HelpTextTest {

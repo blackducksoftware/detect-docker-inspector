@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
 
 public class CommandCreator {
     private static final int START_AS_NEEDED_IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8100;

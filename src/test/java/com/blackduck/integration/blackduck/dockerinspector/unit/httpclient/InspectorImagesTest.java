@@ -11,10 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.InspectorImages;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.InspectorImages;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 
 @ExtendWith(SpringExtension.class)
 public class InspectorImagesTest {

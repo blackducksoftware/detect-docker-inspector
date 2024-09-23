@@ -16,14 +16,14 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.bdio.BdioReader;
-import com.synopsys.integration.bdio.model.SimpleBdioDocument;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.output.Result;
-import com.synopsys.integration.blackduck.dockerinspector.testutils.CommandCreator;
-import com.synopsys.integration.blackduck.dockerinspector.testutils.TestConfig;
-import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.bdio.BdioReader;
+import com.blackduck.integration.bdio.model.SimpleBdioDocument;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.output.Result;
+import com.blackduck.integration.blackduck.dockerinspector.testutils.CommandCreator;
+import com.blackduck.integration.blackduck.dockerinspector.testutils.TestConfig;
+import com.blackduck.integration.blackduck.dockerinspector.testutils.TestUtils;
+import com.blackduck.integration.exception.IntegrationException;
 
 public class IntegrationTestRunner {
     private final CommandCreator commandCreator;

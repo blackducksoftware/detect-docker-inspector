@@ -20,11 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.bdio.BdioWriter;
-import com.synopsys.integration.bdio.model.SimpleBdioDocument;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.bdio.BdioWriter;
+import com.blackduck.integration.bdio.model.SimpleBdioDocument;
+import com.blackduck.integration.exception.IntegrationException;
 
 @Component
 public class Output {

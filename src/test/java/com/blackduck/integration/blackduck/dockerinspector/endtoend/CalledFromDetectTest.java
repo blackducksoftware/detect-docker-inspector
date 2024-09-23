@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.google.common.io.Files;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.dockerinspector.testutils.TestUtils;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.dockerinspector.testutils.TestUtils;
+import com.blackduck.integration.exception.IntegrationException;
 
 @Tag("integration")
 public class CalledFromDetectTest {

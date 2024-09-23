@@ -23,19 +23,19 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.exception.HelpGenerationException;
-import com.synopsys.integration.blackduck.dockerinspector.help.HelpWriter;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
-import com.synopsys.integration.blackduck.dockerinspector.output.Output;
-import com.synopsys.integration.blackduck.dockerinspector.output.Result;
-import com.synopsys.integration.blackduck.dockerinspector.output.ResultFile;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
-import com.synopsys.integration.blackduck.imageinspector.image.common.RepoTag;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.DockerInspectorSystemProperties;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.exception.HelpGenerationException;
+import com.blackduck.integration.blackduck.dockerinspector.help.HelpWriter;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.HttpClientInspector;
+import com.blackduck.integration.blackduck.dockerinspector.output.Output;
+import com.blackduck.integration.blackduck.dockerinspector.output.Result;
+import com.blackduck.integration.blackduck.dockerinspector.output.ResultFile;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.blackduck.integration.blackduck.imageinspector.image.common.RepoTag;
+import com.blackduck.integration.exception.IntegrationException;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.blackduck.integration.blackduck.imageinspector", "com.blackduck.integration.blackduck.dockerinspector" })

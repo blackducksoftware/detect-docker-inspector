@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.blackduck.dockerinspector.exception;
 
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.exception.IntegrationException;
 
 public class HelpGenerationException extends IntegrationException {
 

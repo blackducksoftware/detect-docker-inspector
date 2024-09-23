@@ -8,7 +8,7 @@
 package com.blackduck.integration.blackduck.dockerinspector.output;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
 import java.io.File;
 import java.io.FileOutputStream;
 import org.slf4j.Logger;

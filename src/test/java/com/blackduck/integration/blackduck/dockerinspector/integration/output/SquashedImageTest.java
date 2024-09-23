@@ -16,16 +16,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.slf4j.LoggerFactory;
 
-import com.synopsys.integration.blackduck.dockerinspector.ProcessId;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.output.CompressedFile;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.SquashedImage;
-import com.synopsys.integration.blackduck.imageinspector.api.name.ImageNameResolver;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.blackduck.dockerinspector.ProcessId;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.blackduck.integration.blackduck.dockerinspector.output.CompressedFile;
+import com.blackduck.integration.blackduck.dockerinspector.output.ImageTarFilename;
+import com.blackduck.integration.blackduck.dockerinspector.output.SquashedImage;
+import com.blackduck.integration.blackduck.imageinspector.api.name.ImageNameResolver;
+import com.blackduck.integration.blackduck.imageinspector.linux.FileOperations;
+import com.blackduck.integration.exception.IntegrationException;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

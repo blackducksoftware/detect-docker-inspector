@@ -13,20 +13,20 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.github.dockerjava.api.model.Container;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.ContainerName;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpConnectionCreator;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.HttpRequestor;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.ImageInspectorClientStartServices;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.ImageInspectorServices;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.InspectorImages;
-import com.synopsys.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
-import com.synopsys.integration.blackduck.dockerinspector.programversion.ProgramVersion;
-import com.synopsys.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
-import com.synopsys.integration.exception.IntegrationException;
-import com.synopsys.integration.rest.RestConstants;
-import com.synopsys.integration.rest.client.IntHttpClient;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.ContainerName;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.HttpConnectionCreator;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.HttpRequestor;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.ImageInspectorClientStartServices;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.ImageInspectorServices;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.InspectorImages;
+import com.blackduck.integration.blackduck.dockerinspector.httpclient.response.SimpleResponse;
+import com.blackduck.integration.blackduck.dockerinspector.programversion.ProgramVersion;
+import com.blackduck.integration.blackduck.imageinspector.api.ImageInspectorOsEnum;
+import com.blackduck.integration.exception.IntegrationException;
+import com.blackduck.integration.rest.RestConstants;
+import com.blackduck.integration.rest.client.IntHttpClient;
 
 @ExtendWith(SpringExtension.class)
 public class IiClientContainersStartedAsNeededTest {

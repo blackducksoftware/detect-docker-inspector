@@ -21,18 +21,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-import com.synopsys.integration.bdio.BdioReader;
-import com.synopsys.integration.bdio.model.SimpleBdioDocument;
-import com.synopsys.integration.blackduck.dockerinspector.config.Config;
-import com.synopsys.integration.blackduck.dockerinspector.config.ProgramPaths;
-import com.synopsys.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
-import com.synopsys.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
-import com.synopsys.integration.blackduck.dockerinspector.output.ImageTarWrapper;
-import com.synopsys.integration.blackduck.dockerinspector.output.Output;
-import com.synopsys.integration.blackduck.dockerinspector.output.OutputFiles;
-import com.synopsys.integration.blackduck.dockerinspector.output.Result;
-import com.synopsys.integration.blackduck.imageinspector.linux.FileOperations;
-import com.synopsys.integration.exception.IntegrationException;
+import com.blackduck.integration.bdio.BdioReader;
+import com.blackduck.integration.bdio.model.SimpleBdioDocument;
+import com.blackduck.integration.blackduck.dockerinspector.config.Config;
+import com.blackduck.integration.blackduck.dockerinspector.config.ProgramPaths;
+import com.blackduck.integration.blackduck.dockerinspector.dockerclient.DockerClientManager;
+import com.blackduck.integration.blackduck.dockerinspector.output.ContainerFilesystemFilename;
+import com.blackduck.integration.blackduck.dockerinspector.output.ImageTarWrapper;
+import com.blackduck.integration.blackduck.dockerinspector.output.Output;
+import com.blackduck.integration.blackduck.dockerinspector.output.OutputFiles;
+import com.blackduck.integration.blackduck.dockerinspector.output.Result;
+import com.blackduck.integration.blackduck.imageinspector.linux.FileOperations;
+import com.blackduck.integration.exception.IntegrationException;
 
 @Component
 public class HttpClientInspector {
