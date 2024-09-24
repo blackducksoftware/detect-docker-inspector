@@ -40,7 +40,7 @@ public class CalledFromDetectTest {
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 
-        String cmdGetDetectScriptString = String.format("curl --insecure -s https://detect.blackduck.com/detect%d.sh", DETECT_MAJOR_VERSION);
+        String cmdGetDetectScriptString = String.format("curl --insecure -s https://detect.synopsys.com/detect%d.sh", DETECT_MAJOR_VERSION);
         String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
         File detectScriptFile = File.createTempFile("latestDetect", ".sh");
         detectScriptFile.setExecutable(true);
