@@ -29,7 +29,7 @@ oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8080/
 oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8081/health
 oc exec blackduck-imageinspector -c build-machine -- curl http://localhost:8082/health
 
-curl -O https://detect.synopsys.com/detect.sh
+curl -O https://detect.blackduck.com/detect.sh
 chmod +x detect.sh
 
 oc cp ./detect.sh blackduck-imageinspector:/tmp -c build-machine

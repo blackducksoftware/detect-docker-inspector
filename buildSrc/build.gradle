@@ -6,23 +6,23 @@ buildscript {
     }
 
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle', to: buildscript
-    project.ext { managedCgpVersion = '2.0.4' }
+    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
 
     dependencies {
-        classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}"
+        classpath "com.blackduck.integration:common-gradle-plugin:${managedCgpVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
 
 version = "1.0.0-SNAPSHOT"
-apply plugin: 'com.synopsys.integration.simple'
+apply plugin: 'com.blackduck.integration.simple'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     implementation "org.freemarker:freemarker:2.3.26-incubating"
-    implementation("com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}") {
+    implementation("com.blackduck.integration:common-gradle-plugin:${managedCgpVersion}") {
         exclude group: 'org.springframework', module: 'spring-core'
     }
-    implementation "com.synopsys.integration:integration-common:20.0.0"
+    implementation "com.blackduck.integration:integration-common:27.0.1"
     implementation gradleApi()
 }

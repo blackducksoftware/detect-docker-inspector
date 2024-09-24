@@ -36,7 +36,7 @@ kubectl create -f kube-imageinspector-namespace.yml
 kubectl create -f kube-imageinspector-service.yml
 kubectl create -f kube-buildmachine.yml
 
-curl -O https://detect.synopsys.com/detect.sh
+curl -O https://detect.blackduck.com/detect.sh
 chmod +x detect.sh
 
 buildmachinepod=$(kubectl --namespace blackduck-imageinspector get pods|grep build-machine|cut -d' ' -f1)

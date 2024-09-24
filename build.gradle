@@ -12,7 +12,7 @@ buildscript {
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
 
-    dependencies { classpath "com.synopsys.integration:common-gradle-plugin:${managedCgpVersion}" }
+    dependencies { classpath "com.blackduck.integration:common-gradle-plugin:${managedCgpVersion}" }
     
     // TODO don't seem to need this repositories
     repositories {
@@ -30,16 +30,16 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "5.2.7"
+project.ext.inspectorImageVersion = "6.0.0"
 
-version = '10.2.1'
+version = '11.0.0-SNAPSHOT'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.bmuschko.docker-remote-api'
-apply plugin: 'com.synopsys.integration.solution'
+apply plugin: 'com.blackduck.integration.solution'
 
-final def externalRepoHost = "https://sig-repo.synopsys.com"
+final def externalRepoHost = "https://repo.blackduck.com"
 final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
 
 repositories {
@@ -63,7 +63,7 @@ repositories {
 
 apply from: 'airgap.gradle'
 
-springBoot { mainClass = 'com.synopsys.integration.blackduck.dockerinspector.DockerInspector' }
+springBoot { mainClass = 'com.blackduck.integration.blackduck.dockerinspector.DockerInspector' }
 
 // By default, starting in 2.5.0, spring boot creates an extra "plain" .jar that we don't want
 jar {
@@ -75,7 +75,7 @@ def createArtifactName() {
 }
 
 repositories {
-    maven { url "https://sig-repo.synopsys.com/bds-bdio-release" }
+    maven { url "https://repo.blackduck.com/bds-bdio-release" }
 }
 
 // TODO if we s/compile/implementation/, can this go?:
@@ -310,8 +310,8 @@ artifactory {
 }
 
 dependencies {
-    implementation "com.synopsys.integration:integration-rest:10.3.6"
-    implementation 'com.synopsys.integration:hub-imageinspector-lib:14.3.7'
+    implementation "com.blackduck.integration:integration-rest:11.0.0"
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.0'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
