@@ -319,6 +319,12 @@ dependencies {
         }
     }
 
+    implementation("org.springframework:spring-core:5.3.34")
+    implementation "org.springframework:spring-aop:5.3.34"
+    implementation "org.springframework:spring-beans:5.3.34"
+    implementation "org.springframework:spring-expression:5.3.34"
+    implementation("org.springframework:spring-context:5.3.34")
+
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
 
