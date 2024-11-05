@@ -30,7 +30,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "6.0.0"
+project.ext.inspectorImageVersion = "6.1.0-SNAPSHOT"
 
 version = '11.1.0-SNAPSHOT'
 
@@ -311,13 +311,19 @@ artifactory {
 
 dependencies {
     implementation "com.blackduck.integration:integration-rest:11.0.0"
-    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.0'
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.1'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
             because 'previous version has a vulnerability'
         }
     }
+
+    implementation("org.springframework:spring-core:5.3.34")
+    implementation "org.springframework:spring-aop:5.3.34"
+    implementation "org.springframework:spring-beans:5.3.34"
+    implementation "org.springframework:spring-expression:5.3.34"
+    implementation("org.springframework:spring-context:5.3.34")
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
