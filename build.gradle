@@ -32,7 +32,7 @@ plugins {
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
 project.ext.inspectorImageVersion = "6.1.0"
 
-version = '11.3.0-SNAPSHOT'
+version = '11.3.0-IDETECT-4714-prune-patched-links-SNAPSHOT'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -311,7 +311,7 @@ artifactory {
 
 dependencies {
     implementation "com.blackduck.integration:integration-rest:11.0.0"
-    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.2'
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.3-IDETECT-4714-prune-dir-links-SNAPSHOT'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
