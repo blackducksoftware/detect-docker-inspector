@@ -30,7 +30,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "6.1.0"
+project.ext.inspectorImageVersion = "6.2.0"
 
 version = '11.3.0-SNAPSHOT'
 
@@ -311,7 +311,7 @@ artifactory {
 
 dependencies {
     implementation "com.blackduck.integration:integration-rest:11.0.0"
-    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.2'
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.3'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
