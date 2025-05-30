@@ -3,7 +3,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 buildscript {
     ext {
         springBootVersion = '2.7.12'
-        dockerJavaVersion = '3.2.13'
+        dockerJavaVersion = '3.5.1-blackduck.1-SNAPSHOT'
         junitPlatformCustomTestTags = 'docker, battery'
         javaTargetCompatibility = 8
         javaSourceCompatibility = 8
@@ -49,6 +49,9 @@ repositories {
     }
     maven {
         url = uri("${internalRepoHost}/artifactory/bds-integrations-snapshot")
+    }
+    maven {
+        url = uri("${internalRepoHost}/artifactory/bds-integrations")
     }
     maven {
         url = uri("${internalRepoHost}/artifactory/bds-integration-placeholder-release")
