@@ -313,7 +313,7 @@ artifactory {
 }
 
 dependencies {
-    implementation "com.blackduck.integration:integration-rest:11.0.0"
+    implementation "com.blackduck.integration:integration-rest:11.1.2"
     implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.2'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
