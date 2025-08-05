@@ -14,7 +14,8 @@ task pullSaveInspectorImages() {
     }
 }
 
-task createAirGapZip(type: Zip, dependsOn: [build, pullSaveInspectorImages, rootProject.tasks.named("signJar")]) {
+task createAirGapZip(type: Zip, dependsOn: [build, pullSaveInspectorImages]) {
+    dependsOn rootProject.tasks.named("signJar")
     from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
     from("${airGapFolder}") { include '*.tar' }
     archiveName("${airGapZipName}")
