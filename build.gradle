@@ -149,7 +149,7 @@ task servedocs() {
     }
 }
 
-task signJar() {
+task signJar {
     dependsOn build
     finalizedBy 'verifyJar'
     doLast {
