@@ -64,8 +64,6 @@ repositories {
     }
 }
 
-//apply from: 'airgap.gradle'
-
 springBoot { mainClass = 'com.blackduck.integration.blackduck.dockerinspector.DockerInspector' }
 
 // By default, starting in 2.5.0, spring boot creates an extra "plain" .jar that we don't want
