@@ -64,7 +64,7 @@ repositories {
     }
 }
 
-apply from: 'airgap.gradle'
+//apply from: 'airgap.gradle'
 
 springBoot { mainClass = 'com.blackduck.integration.blackduck.dockerinspector.DockerInspector' }
 
@@ -149,7 +149,7 @@ task servedocs() {
     }
 }
 
-task signJar {
+task signJar() {
     dependsOn build
     finalizedBy 'verifyJar'
     doLast {
@@ -165,6 +165,38 @@ task verifyJar() {
         exec {
             // returns 0 if successfully verified as signed; non-0 if not
             commandLine 'jarsigner', '-verify', '-strict', "${createArtifactName()}"
+        }
+    }
+}
+
+final String airGapFolder = "${buildDir}/airgap"
+final String airGapZipName = "${project.name}-${version}-air-gap.zip"
+final String artifactoryIntegrationPath = "com/blackduck/integration"
+
+task pullSaveInspectorImages() {
+    doLast {
+        exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-centos.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
+        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-alpine.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
+    }
+}
+
+task createAirGapZip(type: Zip, dependsOn: [build, pullSaveInspectorImages, signJar]) {
+    from("${buildDir}/libs") { include "${project.name}-${version}.jar" }
+    from("${airGapFolder}") { include '*.tar' }
+    archiveName("${airGapZipName}")
+    destinationDir(file("${airGapFolder}"))
+}
+
+task publishAirGapZip() {
+    dependsOn createAirGapZip
+    doLast {
+        exec {
+            commandLine 'curl', '--insecure','-u', "${project.ext.artifactoryDeployerUsername}:${project.ext.artifactoryDeployerPassword}", '-X', 'PUT', "${project.ext.deployArtifactoryUrl}/${project.ext.artifactoryRepo}/${artifactoryIntegrationPath}/${project.name}/${version}/${airGapZipName}", '-T', "${airGapFolder}/${airGapZipName}", '-f'
         }
     }
 }
