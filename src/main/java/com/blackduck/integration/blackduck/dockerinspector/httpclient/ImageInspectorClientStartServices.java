@@ -273,7 +273,7 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         Optional<String> imageId = Optional.empty();
 
         String preferredRegistry = config.getInspectorRepositoryPreferredRegistry();
-        logger.debug("Preferred resitry: {}", preferredRegistry);
+        logger.debug("Preferred registry: {}", preferredRegistry);
         if (!preferredRepoUnreachable && !preferredRegistry.isEmpty()) {
             String preferredRepo = preferredRegistry + imageInspectorRepo;
             try {
