@@ -156,6 +156,10 @@ public class Config {
     @Value("${inspector.repository:blackducksoftware}")
     private String inspectorRepository = "blackducksoftware";
 
+    @ValueDescription(description = "Preferred registry for Docker Inspector images. If empty, the images will always be pulled from Docker HUB.", defaultValue = "repo.blackduck.com/containers/", group = Config.GROUP_PRIVATE, deprecated = false)
+    @Value("${inspector.repository.preferred.registry:repo.blackduck.com/containers/}")
+    private String inspectorRepositoryPreferredRegistry = "repo.blackduck.com/containers/";
+
     @ValueDescription(description = "Docker Inspector image \"family\"", defaultValue = "", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${inspector.image.family:}")
     private String inspectorImageFamily = "";
@@ -427,6 +431,10 @@ public class Config {
         return optionsByFieldName.get("inspectorRepository").getResolvedValue();
     }
 
+    public String getInspectorRepositoryPreferredRegistry() {
+        return optionsByFieldName.get("inspectorRepositoryPreferredRegistry").getResolvedValue();
+    }
+
     public String getInspectorImageFamily() {
         return optionsByFieldName.get("inspectorImageFamily").getResolvedValue();
     }
@@ -573,6 +581,7 @@ public class Config {
         this.workingDirPath = null;
         this.systemPropertiesPath = null;
         this.inspectorRepository = null;
+        this.inspectorRepositoryPreferredRegistry = null;
         this.cleanupInspectorContainer = null;
         this.cleanupInspectorImage = null;
         this.organizeComponentsByLayer = null;

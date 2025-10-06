@@ -40,6 +40,9 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
     private final String II_SERVICE_URI_SCHEME = "http";
     private final String II_SERVICE_HOST = "localhost";
 
+    // Track if preferred repository is unreachable to avoid repeated attempts
+    private boolean preferredRepoUnreachable = false;
+
     @Autowired
     private Config config;
 
@@ -247,16 +250,16 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         imageInspectorRepo = inspectorImages.getInspectorImageName(inspectorOs);
         imageInspectorTag = inspectorImages.getInspectorImageTag(inspectorOs);
         logger.debug(String.format("Need to pull/run image %s:%s to start the %s service", imageInspectorRepo, imageInspectorTag, imageInspectorUri.toString()));
-        Optional<String> imageId = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
+        PullResult pullResult = pullImageTolerantly(imageInspectorRepo, imageInspectorTag);
         int containerPort = imageInspectorServices.getImageInspectorContainerPort(inspectorOs);
         int hostPort = imageInspectorServices.getImageInspectorHostPort(inspectorOs);
         String containerName = containerNameManager.deriveContainerNameFromImageInspectorRepo(imageInspectorRepo);
-        String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
+        String containerId = dockerClientManager.startContainerAsService(pullResult.getActualRepoName(), imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
             Config.IMAGEINSPECTOR_WS_APPNAME,
             String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),
             deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
-        ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);
+        ContainerDetails containerDetails = new ContainerDetails(pullResult.getImageId().orElse(null), containerId);
         serviceIsUp = imageInspectorServices.startService(httpClient, imageInspectorUri, imageInspectorRepo, imageInspectorTag);
         if (!serviceIsUp) {
             dockerClientManager.logServiceLogAsDebug(containerId);
@@ -266,15 +269,52 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         return containerDetails;
     }
 
-    private Optional<String> pullImageTolerantly(String imageInspectorRepo, String imageInspectorTag) {
+    private PullResult pullImageTolerantly(String imageInspectorRepo, String imageInspectorTag) {
         Optional<String> imageId = Optional.empty();
-        try {
-            imageId = Optional.ofNullable(dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag));
-            logger.debug(String.format("Pulled image ID %s", imageId.orElse("<null>")));
-        } catch (Exception e) {
-            logger.warn(String.format("Unable to pull docker image %s:%s; proceeding anyway since it may already exist locally", imageInspectorRepo, imageInspectorTag));
+
+        String preferredRegistry = config.getInspectorRepositoryPreferredRegistry();
+        logger.debug("Preferred resitry: {}", preferredRegistry);
+        if (!preferredRepoUnreachable && !preferredRegistry.isEmpty()) {
+            String preferredRepo = preferredRegistry + imageInspectorRepo;
+            try {
+                logger.info("Attempting to pull from preferred repository: {}:{}", preferredRepo, imageInspectorTag);
+                imageId = Optional.ofNullable(dockerClientManager.pullImage(preferredRepo, imageInspectorTag));
+                logger.info("Successfully pulled from preferred repository. Image ID: {}", imageId);
+                return new PullResult(imageId, preferredRepo);
+            } catch (Exception e) {
+                logger.warn("Unable to pull docker image from preferred repository {}:{}, marking as unreachable and falling back to Docker HUB. Error: {}",
+                    preferredRepo, imageInspectorTag, e.getMessage());
+                preferredRepoUnreachable = true;
+            }
+        } else {
+            logger.debug("Skipping preferred repository and proceeding to Docker HUB fallback");
         }
-        return imageId;
+
+        try {
+            logger.info("Attempting to pull from Docker HUB: {}:{}", imageInspectorRepo, imageInspectorTag);
+            imageId = Optional.ofNullable(dockerClientManager.pullImage(imageInspectorRepo, imageInspectorTag));
+            logger.debug("Pulled image ID {}", imageId);
+        } catch (Exception e) {
+            logger.warn("Unable to pull docker image {}:{} from Docker HUB; proceeding anyway since it may already exist locally", imageInspectorRepo, imageInspectorTag);
+        }
+        return new PullResult(imageId, imageInspectorRepo);
     }
 
+    private static class PullResult {
+        private final Optional<String> imageId;
+        private final String actualRepoName;
+
+        public PullResult(Optional<String> imageId, String actualRepoName) {
+            this.imageId = imageId;
+            this.actualRepoName = actualRepoName;
+        }
+
+        public Optional<String> getImageId() {
+            return imageId;
+        }
+
+        public String getActualRepoName() {
+            return actualRepoName;
+        }
+    }
 }
