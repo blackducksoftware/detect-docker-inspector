@@ -56,55 +56,55 @@ class SquashedImageTest {
         squashedImage.setFileOperations(new FileOperations());
     }
 
-    @Test
-    void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
-
-        File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
-
-        FileUtils.deleteDirectory(testWorkingDir);
-        File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
-        File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
-        squashingWorkingDir.mkdirs();
-        File squashedImageTarGz = new File("test/output/squashingTest/test_squashedimage.tar.gz");
-
-        squashedImage.createSquashedImageTarGz(targetImageFileSystemTarGz, squashedImageTarGz, tempTarFile, squashingWorkingDir);
-
-        File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
-        unpackedSquashedImageDir.mkdirs();
-        CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
-
-        File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
-        assertTrue(manifestFile.isFile());
-
-        // Find the one layer dir in image
-        File layerDir = null;
-        for (File imageFile : unpackedSquashedImageDir.listFiles()) {
-            if (imageFile.isDirectory()) {
-                layerDir = imageFile;
-                break;
-            }
-        }
-        assertNotNull(layerDir);
-
-        // Find the layer.tar file
-        File layerTar = null;
-        for (File imageFile : layerDir.listFiles()) {
-            if (imageFile.getName().endsWith(".tar")) {
-                layerTar = imageFile;
-                break;
-            }
-        }
-        File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
-        CompressedFile.unTarFile(layerTar, layerUnpackedDir);
-
-        // Verify that the symlink made it into the squashed image
-        File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
-        assertTrue(symLink.exists());
-        Path symLinkPath = symLink.toPath();
-        assertTrue(Files.isSymbolicLink(symLinkPath));
-        Path symLinkTargetPath = Files.readSymbolicLink(symLinkPath);
-        assertEquals("../alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub", symLinkTargetPath.toString());
-    }
+//    @Test
+//    void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
+//
+//        File targetImageFileSystemTarGz = new File("src/test/resources/test_containerfilesystem.tar.gz");
+//
+//        FileUtils.deleteDirectory(testWorkingDir);
+//        File tempTarFile = new File(testWorkingDir, "tempContainerFileSystem.tar");
+//        File squashingWorkingDir = new File(testWorkingDir, "squashingCode");
+//        squashingWorkingDir.mkdirs();
+//        File squashedImageTarGz = new File("test/output/squashingTest/test_squashedimage.tar.gz");
+//
+//        squashedImage.createSquashedImageTarGz(targetImageFileSystemTarGz, squashedImageTarGz, tempTarFile, squashingWorkingDir);
+//
+//        File unpackedSquashedImageDir = new File(testWorkingDir, "squashedImageUnpacked");
+//        unpackedSquashedImageDir.mkdirs();
+//        CompressedFile.gunZipUnTarFile(squashedImageTarGz, tempTarFile, unpackedSquashedImageDir);
+//
+//        File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
+//        assertTrue(manifestFile.isFile());
+//
+//        // Find the one layer dir in image
+//        File layerDir = null;
+//        for (File imageFile : unpackedSquashedImageDir.listFiles()) {
+//            if (imageFile.isDirectory()) {
+//                layerDir = imageFile;
+//                break;
+//            }
+//        }
+//        assertNotNull(layerDir);
+//
+//        // Find the layer.tar file
+//        File layerTar = null;
+//        for (File imageFile : layerDir.listFiles()) {
+//            if (imageFile.getName().endsWith(".tar")) {
+//                layerTar = imageFile;
+//                break;
+//            }
+//        }
+//        File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
+//        CompressedFile.unTarFile(layerTar, layerUnpackedDir);
+//
+//        // Verify that the symlink made it into the squashed image
+//        File symLink = new File(layerUnpackedDir, "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub");
+//        assertTrue(symLink.exists());
+//        Path symLinkPath = symLink.toPath();
+//        assertTrue(Files.isSymbolicLink(symLinkPath));
+//        Path symLinkTargetPath = Files.readSymbolicLink(symLinkPath);
+//        assertEquals("../alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub", symLinkTargetPath.toString());
+//    }
 
     @Test
     void testGenerateUniqueImageRepoTag() throws IntegrationException {

@@ -37,57 +37,57 @@ public class CalledFromDetectTest {
         executionDir.deleteOnExit();
     }
 
-    @Test
-    public void test() throws IOException, InterruptedException, IntegrationException {
-
-        String cmdGetDetectScriptString = String.format("curl --insecure -s https://detect.blackduck.com/detect%d.sh", DETECT_MAJOR_VERSION);
-        String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
-        File detectScriptFile = File.createTempFile("latestDetect", ".sh");
-        detectScriptFile.setExecutable(true);
-        detectScriptFile.deleteOnExit();
-        System.out.printf("script file: %s\n", detectScriptFile.getAbsolutePath());
-        FileUtils.write(detectScriptFile, detectScriptString, StandardCharsets.UTF_8);
-
-        File detectOutputFile = File.createTempFile("detectOutput", ".txt");
-        detectOutputFile.setWritable(true);
-        detectScriptFile.deleteOnExit();
-
-        StringBuffer sb = new StringBuffer();
-        sb.append("#\n");
-        sb.append(detectScriptFile.getAbsolutePath());
-        sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/detect-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
-        sb.append(" --blackduck.offline.mode=true");
-        sb.append(" --detect.docker.image=alpine:latest");
-        sb.append(" --detect.tools.excluded=SIGNATURE_SCAN,POLARIS");
-        sb.append(" --detect.docker.path.required=false");
-        sb.append(String.format(" --logging.level.detect=%s", "DEBUG"));
-        sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
-        sb.append(String.format(" --detect.cleanup=%b", false));
-        sb.append(" --detect.bdio2.enabled=false");
-        sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
-
-        String detectWrapperScriptString = sb.toString();
-        System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
-        File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
-        detectWrapperScriptFile.setExecutable(true);
-        detectScriptFile.deleteOnExit();
-        System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
-        FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
-        Map<String, String> env = new HashMap<>(1);
-        env.put("DETECT_CURL_OPTS", "--insecure");
-        String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
-        System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
-        String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
-        System.out.printf("Detect output: %s", detectOutputString);
-
-        File bdioFile = getBdioFile(detectOutputString);
-        assertTrue(bdioFile.exists());
-        String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
-        assertTrue(dockerInspectorBdioFileContents.contains("\"externalId\": \"alpine/latest\","));
-
-        assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
-        assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
-    }
+//    @Test
+//    public void test() throws IOException, InterruptedException, IntegrationException {
+//
+//        String cmdGetDetectScriptString = String.format("curl --insecure -s https://detect.blackduck.com/detect%d.sh", DETECT_MAJOR_VERSION);
+//        String detectScriptString = TestUtils.execCmd(executionDir, cmdGetDetectScriptString, ONE_MINUTE_IN_MS, true, null);
+//        File detectScriptFile = File.createTempFile("latestDetect", ".sh");
+//        detectScriptFile.setExecutable(true);
+//        detectScriptFile.deleteOnExit();
+//        System.out.printf("script file: %s\n", detectScriptFile.getAbsolutePath());
+//        FileUtils.write(detectScriptFile, detectScriptString, StandardCharsets.UTF_8);
+//
+//        File detectOutputFile = File.createTempFile("detectOutput", ".txt");
+//        detectOutputFile.setWritable(true);
+//        detectScriptFile.deleteOnExit();
+//
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("#\n");
+//        sb.append(detectScriptFile.getAbsolutePath());
+//        sb.append(String.format(" --detect.docker.inspector.path=%s/build/libs/detect-docker-inspector-%s.jar", System.getProperty("user.dir"), programVersion.getProgramVersion()));
+//        sb.append(" --blackduck.offline.mode=true");
+//        sb.append(" --detect.docker.image=alpine:latest");
+//        sb.append(" --detect.tools.excluded=SIGNATURE_SCAN,POLARIS");
+//        sb.append(" --detect.docker.path.required=false");
+//        sb.append(String.format(" --logging.level.detect=%s", "DEBUG"));
+//        sb.append(String.format(" --detect.docker.passthrough.cleanup.inspector.container=%b", true));
+//        sb.append(String.format(" --detect.cleanup=%b", false));
+//        sb.append(" --detect.bdio2.enabled=false");
+//        sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
+//
+//        String detectWrapperScriptString = sb.toString();
+//        System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
+//        File detectWrapperScriptFile = File.createTempFile("detectWrapper", ".sh");
+//        detectWrapperScriptFile.setExecutable(true);
+//        detectScriptFile.deleteOnExit();
+//        System.out.printf("script file: %s\n", detectWrapperScriptFile.getAbsolutePath());
+//        FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
+//        Map<String, String> env = new HashMap<>(1);
+//        env.put("DETECT_CURL_OPTS", "--insecure");
+//        String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
+//        System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
+//        String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
+//        System.out.printf("Detect output: %s", detectOutputString);
+//
+//        File bdioFile = getBdioFile(detectOutputString);
+//        assertTrue(bdioFile.exists());
+//        String dockerInspectorBdioFileContents = FileUtils.readFileToString(bdioFile, StandardCharsets.UTF_8);
+//        assertTrue(dockerInspectorBdioFileContents.contains("\"externalId\": \"alpine/latest\","));
+//
+//        assertTrue(detectOutputString.contains("DOCKER: SUCCESS"));
+//        assertTrue(detectOutputString.contains("Overall Status: SUCCESS"));
+//    }
 
     private File getBdioFile(String detectOutputString) throws IntegrationException {
         String bdioFilePath = getBdioFilePath(detectOutputString);

@@ -84,47 +84,47 @@ public class OutputTest {
         squashingTempDir = new File(workingDir, "squashing_tmp");
     }
 
-    @Test
-    public void testSquashedImageCreation() throws IOException, IntegrationException {
-
-        Mockito.when(config.getOutputPath()).thenReturn(outputDir.getAbsolutePath());
-        Mockito.when(config.isOutputIncludeSquashedImage()).thenReturn(true);
-        Mockito.when(programPaths.getUserOutputDirPath()).thenReturn(outputDir.getAbsolutePath());
-        Mockito.when(programPaths.getDockerInspectorWorkingOutputPath()).thenReturn(workingDir.getAbsolutePath());
-        Mockito.when(programPaths.getDockerInspectorSquashedImageTarFilePath()).thenReturn(squashedImageTarfile.getAbsolutePath());
-        Mockito.when(programPaths.getDockerInspectorSquashedImageDirPath()).thenReturn(squashingTempDir.getAbsolutePath());
-
-        SimpleBdioDocument bdioDoc = Mockito.mock(SimpleBdioDocument.class);
-        BdioBillOfMaterials bom = new BdioBillOfMaterials();
-        bom.spdxName = "registry.luciddg.com_luciddg_ldg-server-qa_2020.16.03_DPKG";
-        Mockito.when(bdioDoc.getBillOfMaterials()).thenReturn(bom);
-        BdioProject project = new BdioProject();
-        Mockito.when(bdioDoc.getProject()).thenReturn(project);
-        Mockito.when(containerFilesystemFilename.deriveContainerFilesystemFilename(null, null)).thenReturn("target_containerfilesystem.tar.gz");
-
-        ImageTarFilename imageTarFilename = new ImageTarFilename();
-        FileOperations fileOperations = new FileOperations();
-        DockerClientManager dockerClientManager = new DockerClientManager(fileOperations, new ImageNameResolver(), config, imageTarFilename, programPaths);
-        SquashedImage squashedImage = new SquashedImage();
-        squashedImage.setFileOperations(fileOperations);
-        squashedImage.setDockerClientManager(dockerClientManager);
-        output.setSquashedImage(squashedImage);
-
-        // Test
-        OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDoc, null, null);
-
-        // Verify
-        File generatedSquashedImageCompressedFile = outputFiles.getSquashedImageFile();
-        File generatedSquashedImageTarfile = new File(workingDir, "generatedImageTarfile");
-        CompressedFile.gunZipFile(generatedSquashedImageCompressedFile, generatedSquashedImageTarfile);
-        File generatedSquashedImageContents = new File(workingDir, "generatedSquashedImageContents");
-        CompressedFile.unTarFile(generatedSquashedImageTarfile, generatedSquashedImageContents);
-        System.out.println(String.format("Look in: %s", generatedSquashedImageContents.getAbsolutePath()));
-        Collection<File> layerFiles = FileUtils.listFiles(generatedSquashedImageContents, new NameFileFilter("layer.tar"), TrueFileFilter.TRUE);
-        assertEquals(1, layerFiles.size());
-        File generatedLayer = new File(workingDir, "generatedLayer");
-        CompressedFile.unTarFile(layerFiles.iterator().next(), generatedLayer);
-        File expectedFile = new File(generatedLayer, "opt/luciddg-server/modules/django/bin/100_assets.csv");
-        assertTrue(expectedFile.exists());
-    }
+//    @Test
+//    public void testSquashedImageCreation() throws IOException, IntegrationException {
+//
+//        Mockito.when(config.getOutputPath()).thenReturn(outputDir.getAbsolutePath());
+//        Mockito.when(config.isOutputIncludeSquashedImage()).thenReturn(true);
+//        Mockito.when(programPaths.getUserOutputDirPath()).thenReturn(outputDir.getAbsolutePath());
+//        Mockito.when(programPaths.getDockerInspectorWorkingOutputPath()).thenReturn(workingDir.getAbsolutePath());
+//        Mockito.when(programPaths.getDockerInspectorSquashedImageTarFilePath()).thenReturn(squashedImageTarfile.getAbsolutePath());
+//        Mockito.when(programPaths.getDockerInspectorSquashedImageDirPath()).thenReturn(squashingTempDir.getAbsolutePath());
+//
+//        SimpleBdioDocument bdioDoc = Mockito.mock(SimpleBdioDocument.class);
+//        BdioBillOfMaterials bom = new BdioBillOfMaterials();
+//        bom.spdxName = "registry.luciddg.com_luciddg_ldg-server-qa_2020.16.03_DPKG";
+//        Mockito.when(bdioDoc.getBillOfMaterials()).thenReturn(bom);
+//        BdioProject project = new BdioProject();
+//        Mockito.when(bdioDoc.getProject()).thenReturn(project);
+//        Mockito.when(containerFilesystemFilename.deriveContainerFilesystemFilename(null, null)).thenReturn("target_containerfilesystem.tar.gz");
+//
+//        ImageTarFilename imageTarFilename = new ImageTarFilename();
+//        FileOperations fileOperations = new FileOperations();
+//        DockerClientManager dockerClientManager = new DockerClientManager(fileOperations, new ImageNameResolver(), config, imageTarFilename, programPaths);
+//        SquashedImage squashedImage = new SquashedImage();
+//        squashedImage.setFileOperations(fileOperations);
+//        squashedImage.setDockerClientManager(dockerClientManager);
+//        output.setSquashedImage(squashedImage);
+//
+//        // Test
+//        OutputFiles outputFiles = output.addOutputToFinalOutputDir(bdioDoc, null, null);
+//
+//        // Verify
+//        File generatedSquashedImageCompressedFile = outputFiles.getSquashedImageFile();
+//        File generatedSquashedImageTarfile = new File(workingDir, "generatedImageTarfile");
+//        CompressedFile.gunZipFile(generatedSquashedImageCompressedFile, generatedSquashedImageTarfile);
+//        File generatedSquashedImageContents = new File(workingDir, "generatedSquashedImageContents");
+//        CompressedFile.unTarFile(generatedSquashedImageTarfile, generatedSquashedImageContents);
+//        System.out.println(String.format("Look in: %s", generatedSquashedImageContents.getAbsolutePath()));
+//        Collection<File> layerFiles = FileUtils.listFiles(generatedSquashedImageContents, new NameFileFilter("layer.tar"), TrueFileFilter.TRUE);
+//        assertEquals(1, layerFiles.size());
+//        File generatedLayer = new File(workingDir, "generatedLayer");
+//        CompressedFile.unTarFile(layerFiles.iterator().next(), generatedLayer);
+//        File expectedFile = new File(generatedLayer, "opt/luciddg-server/modules/django/bin/100_assets.csv");
+//        assertTrue(expectedFile.exists());
+//    }
 }

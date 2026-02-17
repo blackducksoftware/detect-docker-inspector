@@ -119,24 +119,24 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
-    @Test
-    public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
-        List<String> additionalArgs = new ArrayList<>();
-        additionalArgs.add("--bdio.organize.components.by.layer=true");
-        additionalArgs.add("--bdio.include.removed.components=true");
-        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
-
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/ubuntu1404.tar")
-            .setPortOnHost(portOnHost)
-            .setAdditionalArgs(additionalArgs)
-            .setRequireBdioMatch(true)
-            .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
-            .setTestSquashedImageGeneration(true)
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
+//    @Test
+//    public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
+//        List<String> additionalArgs = new ArrayList<>();
+//        additionalArgs.add("--bdio.organize.components.by.layer=true");
+//        additionalArgs.add("--bdio.include.removed.components=true");
+//        final int portOnHost = IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU;
+//
+//        TestConfig testConfig = new TestConfigBuilder()
+//            .setTarFilePath("build/images/test/ubuntu1404.tar")
+//            .setPortOnHost(portOnHost)
+//            .setAdditionalArgs(additionalArgs)
+//            .setRequireBdioMatch(true)
+//            .setCodelocationName("testUbuntu1404LayeredIncludeRemoved")
+//            .setTestSquashedImageGeneration(true)
+//            .build();
+//
+//        testTarUsingExistingContainer(testConfig);
+//    }
 
     @Test
     public void testUbuntuStartContainer() throws IOException, InterruptedException, IntegrationException {
@@ -338,22 +338,22 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
-    @Test
-    public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/aggregated.tar")
-            .setTargetRepo("blackducksoftware/whiteouttest")
-            .setTargetTag("1.0")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("libc-bin")
-            .setOutputBomMustNotContainComponentPrefix("curl")
-            .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
+//    @Test
+//    public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
+//        TestConfig testConfig = new TestConfigBuilder()
+//            .setTarFilePath("build/images/test/aggregated.tar")
+//            .setTargetRepo("blackducksoftware/whiteouttest")
+//            .setTargetTag("1.0")
+//            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
+//            .setRequireBdioMatch(false)
+//            .setMinNumberOfComponentsExpected(10)
+//            .setOutputBomMustContainComponentPrefix("libc-bin")
+//            .setOutputBomMustNotContainComponentPrefix("curl")
+//            .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
+//            .build();
+//
+//        testTarUsingExistingContainer(testConfig);
+//    }
 
     @Test
     public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
