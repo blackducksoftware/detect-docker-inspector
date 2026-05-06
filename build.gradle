@@ -8,7 +8,9 @@ buildscript {
         javaTargetCompatibility = 8
         javaSourceCompatibility = 8
     }
-    ext['logback.version'] = '1.2.13'
+    ext['logback.version'] = '1.5.32'
+    ext['slf4j.version'] = '2.0.13'
+    ext['json-path.version'] = '2.10.0'
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
 
@@ -40,7 +42,7 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.blackduck.integration.solution'
 
 final def externalRepoHost = "https://repo.blackduck.com"
-final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
+final def internalRepoHost = "https://artifactory.tools.duckutil.net"
 
 repositories {
     println "Checking if environment property SNPS_INTERNAL_ARTIFACTORY is configured: ${internalRepoHost}"
@@ -83,6 +85,23 @@ repositories {
 configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
+
+    // Force guava upgrade to fix known vulnerability (transitive from docker-java)
+    all {
+        resolutionStrategy {
+            force 'com.google.guava:guava:33.6.0-android'
+            // Force okio upgrade to fix known vulnerability (transitive from io.fabric8:kubernetes-client)
+            force 'com.squareup.okio:okio:3.17.0'
+            // Force json-path upgrade to fix known vulnerability
+            force 'com.jayway.jsonpath:json-path:2.10.0'
+            // Force logback upgrade to fix known vulnerability
+            force 'ch.qos.logback:logback-classic:1.5.32'
+            force 'ch.qos.logback:logback-core:1.5.32'
+            // logback 1.5.x requires slf4j-api 2.x (LoggingEventAware); force it to match
+            force 'org.slf4j:slf4j-api:2.0.13'
+            force 'org.slf4j:jul-to-slf4j:2.0.13'
+        }
+    }
 }
 
 task writeVersionToPropertiesFile() {
@@ -342,12 +361,19 @@ artifactory {
     }
 }
 
+dependencyManagement {
+    dependencies {
+        // Override json-path managed by Spring Boot BOM to fix vulnerability
+        dependency 'com.jayway.jsonpath:json-path:2.10.0'
+    }
+}
+
 dependencies {
     implementation "com.blackduck.integration:integration-rest:11.1.2"
     implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.4'
-    implementation 'ch.qos.logback:logback-classic:1.2.13'
+    implementation 'ch.qos.logback:logback-classic:1.5.32'
     constraints {
-        implementation('ch.qos.logback:logback-core:1.2.13') {
+        implementation('ch.qos.logback:logback-core:1.5.32') {
             because 'previous version has a vulnerability'
         }
     }
@@ -366,6 +392,6 @@ dependencies {
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.fabric8:kubernetes-client:3.1.8'
+    testImplementation 'io.fabric8:kubernetes-client:3.2.0'
     testImplementation 'io.fabric8:kubernetes-model:2.0.8'
 }
