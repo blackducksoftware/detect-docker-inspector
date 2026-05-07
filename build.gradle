@@ -42,7 +42,7 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.blackduck.integration.solution'
 
 final def externalRepoHost = "https://repo.blackduck.com"
-final def internalRepoHost = "https://artifactory.tools.duckutil.net"
+final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
 
 repositories {
     println "Checking if environment property SNPS_INTERNAL_ARTIFACTORY is configured: ${internalRepoHost}"
