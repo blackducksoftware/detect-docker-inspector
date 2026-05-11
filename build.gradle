@@ -8,7 +8,7 @@ buildscript {
         javaTargetCompatibility = 8
         javaSourceCompatibility = 8
     }
-    ext['logback.version'] = '1.2.4-groovyless'
+    ext['logback.version'] = '1.2.13'
     ext['json-path.version'] = '2.10.0'
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
@@ -94,8 +94,8 @@ configurations {
             // Force json-path upgrade to fix known vulnerability
             force 'com.jayway.jsonpath:json-path:2.10.0'
             // Force logback upgrade to fix known vulnerability
-            force 'ch.qos.logback:logback-classic:1.2.4-groovyless'
-            force 'ch.qos.logback:logback-core:1.2.4-groovyless'
+            force 'ch.qos.logback:logback-classic:1.2.13'
+            force 'ch.qos.logback:logback-core:1.2.13'
         }
         // Bouncy Castle: docker-java pulls jdk15on:1.64, but from 1.71+ BC only publishes under jdk18on.
         // Use dependencySubstitution to swap artifact ID AND version in one step.
@@ -252,7 +252,7 @@ task createTestDockerfile(type: Dockerfile, dependsOn: createTestImagesDir) {
 }
 
 task buildTestDockerImage(type: Exec, dependsOn: [removeTestBaseImage, removeTestImage, createTestImagesDir]) {
-    commandLine "docker", "build", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0",        \
+    commandLine "docker", "build", "--platform", "linux/amd64", "--no-cache", "--tag", "blackducksoftware/centos_minus_vim_plus_bacula:1.0", \
                "src/test/resources"
 }
 
@@ -373,9 +373,9 @@ dependencyManagement {
 dependencies {
     implementation "com.blackduck.integration:integration-rest:11.1.2"
     implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.4'
-    implementation 'ch.qos.logback:logback-classic:1.2.4-groovyless'
+    implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
-        implementation('ch.qos.logback:logback-core:1.2.4-groovyless') {
+        implementation('ch.qos.logback:logback-core:1.2.13') {
             because 'previous version has a vulnerability'
         }
     }
