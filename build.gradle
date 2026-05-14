@@ -88,7 +88,7 @@ configurations {
     // Force guava upgrade to fix known vulnerability (transitive from docker-java)
     all {
         resolutionStrategy {
-            force 'com.google.guava:guava:33.6.0-android'
+            force 'com.google.guava:guava:32.0.1-jre'
             // Force okio upgrade to fix known vulnerability (transitive from io.fabric8:kubernetes-client)
             force 'com.squareup.okio:okio:3.17.0'
             // Force json-path upgrade to fix known vulnerability
