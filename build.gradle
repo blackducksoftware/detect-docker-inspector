@@ -9,6 +9,7 @@ buildscript {
         javaSourceCompatibility = 8
     }
     ext['logback.version'] = '1.2.13'
+    ext['json-path.version'] = '2.10.0'
     apply from: "https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle", to: buildscript
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
 
@@ -83,6 +84,23 @@ repositories {
 configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
+
+    // Force guava upgrade to fix known vulnerability (transitive from docker-java)
+    all {
+        resolutionStrategy {
+            force 'com.google.guava:guava:32.0.1-jre'
+            // Force okio upgrade to fix known vulnerability (transitive from io.fabric8:kubernetes-client)
+            force 'com.squareup.okio:okio:3.17.0'
+            // Force json-path upgrade to fix known vulnerability
+            force 'com.jayway.jsonpath:json-path:2.10.0'
+        }
+        // Bouncy Castle: docker-java pulls jdk15on:1.64, but from 1.71+ BC only publishes under jdk18on.
+        // Use dependencySubstitution to swap artifact ID AND version in one step.
+        resolutionStrategy.dependencySubstitution {
+            substitute module('org.bouncycastle:bcpkix-jdk15on') using module('org.bouncycastle:bcpkix-jdk18on:1.84')
+            substitute module('org.bouncycastle:bcprov-jdk15on') using module('org.bouncycastle:bcprov-jdk18on:1.84')
+        }
+    }
 }
 
 task writeVersionToPropertiesFile() {
@@ -342,9 +360,16 @@ artifactory {
     }
 }
 
+dependencyManagement {
+    dependencies {
+        // Override json-path managed by Spring Boot BOM to fix vulnerability
+        dependency 'com.jayway.jsonpath:json-path:2.10.0'
+    }
+}
+
 dependencies {
-    implementation "com.blackduck.integration:integration-rest:11.1.2"
-    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.4'
+    implementation "com.blackduck.integration:integration-rest:11.1.4"
+    implementation 'com.blackduck.integration:hub-imageinspector-lib:15.0.5'
     implementation 'ch.qos.logback:logback-classic:1.2.13'
     constraints {
         implementation('ch.qos.logback:logback-core:1.2.13') {
@@ -366,6 +391,6 @@ dependencies {
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.fabric8:kubernetes-client:3.1.8'
+    testImplementation 'io.fabric8:kubernetes-client:3.2.0'
     testImplementation 'io.fabric8:kubernetes-model:2.0.8'
 }
