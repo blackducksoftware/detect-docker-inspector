@@ -1,13 +1,16 @@
 package com.blackduck.integration.blackduck.dockerinspector.integration.output;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.junit.jupiter.api.BeforeAll;
@@ -120,10 +123,27 @@ public class OutputTest {
         File generatedSquashedImageContents = new File(workingDir, "generatedSquashedImageContents");
         CompressedFile.unTarFile(generatedSquashedImageTarfile, generatedSquashedImageContents);
         System.out.println(String.format("Look in: %s", generatedSquashedImageContents.getAbsolutePath()));
+
+        // Find the layer tar: classic Docker format uses <hash>/layer.tar,
+        // OCI format (Docker 25+ with containerd image store) uses blobs/sha256/<hash> with no extension.
+        File layerTarFile;
         Collection<File> layerFiles = FileUtils.listFiles(generatedSquashedImageContents, new NameFileFilter("layer.tar"), TrueFileFilter.TRUE);
-        assertEquals(1, layerFiles.size());
+        if (!layerFiles.isEmpty()) {
+            // Classic Docker image format
+            assertEquals(1, layerFiles.size());
+            layerTarFile = layerFiles.iterator().next();
+        } else {
+            // OCI image format: blobs/sha256/ contains config blob (small JSON) + layer blob (large tar).
+            // Pick the largest blob — that is the layer.
+            File blobsDir = new File(generatedSquashedImageContents, "blobs/sha256");
+            assertTrue(blobsDir.isDirectory(), "Expected classic layer.tar or OCI blobs/sha256 directory in squashed image");
+            Collection<File> blobs = FileUtils.listFiles(blobsDir, TrueFileFilter.TRUE, FalseFileFilter.FALSE);
+            layerTarFile = blobs.stream().max(Comparator.comparingLong(File::length)).orElse(null);
+            assertNotNull(layerTarFile, "Could not find layer blob in OCI format blobs/sha256/");
+        }
+
         File generatedLayer = new File(workingDir, "generatedLayer");
-        CompressedFile.unTarFile(layerFiles.iterator().next(), generatedLayer);
+        CompressedFile.unTarFile(layerTarFile, generatedLayer);
         File expectedFile = new File(generatedLayer, "opt/luciddg-server/modules/django/bin/100_assets.csv");
         assertTrue(expectedFile.exists());
     }

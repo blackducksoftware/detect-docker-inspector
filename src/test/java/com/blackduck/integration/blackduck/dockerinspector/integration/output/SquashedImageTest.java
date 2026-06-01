@@ -8,8 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Comparator;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -76,24 +80,35 @@ class SquashedImageTest {
         File manifestFile = new File(unpackedSquashedImageDir, "manifest.json");
         assertTrue(manifestFile.isFile());
 
-        // Find the one layer dir in image
-        File layerDir = null;
-        for (File imageFile : unpackedSquashedImageDir.listFiles()) {
-            if (imageFile.isDirectory()) {
-                layerDir = imageFile;
-                break;
-            }
-        }
-        assertNotNull(layerDir);
-
-        // Find the layer.tar file
+        // Find the layer tar: handles both classic Docker format and OCI format (Docker 25+).
         File layerTar = null;
-        for (File imageFile : layerDir.listFiles()) {
-            if (imageFile.getName().endsWith(".tar")) {
-                layerTar = imageFile;
-                break;
+
+        // Classic Docker format: look for a directory (not "blobs") containing a .tar file
+        for (File imageFile : unpackedSquashedImageDir.listFiles()) {
+            if (imageFile.isDirectory() && !imageFile.getName().equals("blobs")) {
+                for (File layerFile : imageFile.listFiles()) {
+                    if (layerFile.getName().endsWith(".tar")) {
+                        layerTar = layerFile;
+                        break;
+                    }
+                }
+                if (layerTar != null) {
+                    break;
+                }
             }
         }
+
+        // OCI format: blobs/sha256/ contains config blob (small JSON) + layer blob (large tar).
+        // Pick the largest blob — that is the layer.
+        if (layerTar == null) {
+            File blobsDir = new File(unpackedSquashedImageDir, "blobs/sha256");
+            if (blobsDir.isDirectory()) {
+                Collection<File> blobs = FileUtils.listFiles(blobsDir, TrueFileFilter.TRUE, FalseFileFilter.FALSE);
+                layerTar = blobs.stream().max(Comparator.comparingLong(File::length)).orElse(null);
+            }
+        }
+
+        assertNotNull(layerTar, "Could not find layer tar in either classic Docker or OCI format");
         File layerUnpackedDir = new File(squashingWorkingDir, "squashedImageLayerUnpacked");
         CompressedFile.unTarFile(layerTar, layerUnpackedDir);
 

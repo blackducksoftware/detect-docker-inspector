@@ -144,7 +144,21 @@ public class DockerClientManager {
             File dockerTarFile = new File(config.getDockerTar());
             checkGivenTarFileExtension(dockerTarFile);
             fileOperations.logFileOwnerGroupPerms(dockerTarFile);
-            tarWrapper = new ImageTarWrapper(dockerTarFile);
+            // If repo+tag are specified and the tar is a multi-image OCI tar (Docker 25+ format),
+            // extract just the requested image so the inspector service gets a single-image tar.
+            // The v6.2.1 inspector service always returns the first image from a multi-image OCI
+            // tar regardless of the imagerepo/imagetag params it receives.
+            File extractedTar = new OciMultiImageTarExtractor()
+                .extractSingleImageTar(dockerTarFile, config.getDockerImageRepo(), config.getDockerImageTag());
+            if (extractedTar != null) {
+                // Use ImageTarWrapper(file) — NOT (file, repo, tag) — so that output filenames
+                // (e.g. aggregated_containerfilesystem.tar.gz) are still derived from the
+                // original tar filename rather than the image repo:tag.
+                // The repo/tag for the service request come from Config directly.
+                tarWrapper = new ImageTarWrapper(extractedTar);
+            } else {
+                tarWrapper = new ImageTarWrapper(dockerTarFile);
+            }
         } else {
             tarWrapper = deriveDockerTarFileGivenImageSpec();
         }
