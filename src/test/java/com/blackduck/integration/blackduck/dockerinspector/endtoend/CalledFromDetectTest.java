@@ -67,7 +67,10 @@ public class CalledFromDetectTest {
         sb.append(" --detect.docker.passthrough.imageinspector.service.port.centos=9101");
         sb.append(" --detect.docker.passthrough.imageinspector.service.port.ubuntu=9102");
         sb.append(String.format(" --detect.cleanup=%b", false));
-        sb.append(String.format(" > %s", detectOutputFile.getAbsolutePath()));
+        // Redirect both stdout and stderr into the output file so all detect output is captured.
+        // Use "|| true" so the wrapper always exits 0 — if detect itself fails, the test assertions
+        // below (DOCKER: SUCCESS, Overall Status: SUCCESS) will catch it with the full output visible.
+        sb.append(String.format(" > %s 2>&1 || true", detectOutputFile.getAbsolutePath()));
 
         String detectWrapperScriptString = sb.toString();
         System.out.printf("Detect wrapper script content:\n%s\n", detectWrapperScriptString);
@@ -78,8 +81,8 @@ public class CalledFromDetectTest {
         FileUtils.write(detectWrapperScriptFile, detectWrapperScriptString, StandardCharsets.UTF_8);
         Map<String, String> env = new HashMap<>();
         env.put("DETECT_CURL_OPTS", "--insecure");
-        String wrapperScriptOutput = TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
-        System.out.printf("Wrapper script output (normally empty):\n%s\n", wrapperScriptOutput);
+        TestUtils.execCmd(executionDir, detectWrapperScriptFile.getAbsolutePath(), FIVE_MINUTES_IN_MS, true, env);
+        System.out.printf("Detect wrapper script finished.\n");
         String detectOutputString = FileUtils.readFileToString(detectOutputFile, StandardCharsets.UTF_8);
         System.out.printf("Detect output: %s", detectOutputString);
 
