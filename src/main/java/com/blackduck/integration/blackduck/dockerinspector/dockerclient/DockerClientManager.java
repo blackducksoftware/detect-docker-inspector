@@ -235,7 +235,12 @@ public class DockerClientManager {
         ExposedPort exposedPort = new ExposedPort(containerPort);
         Ports portBindings = new Ports();
         portBindings.bind(exposedPort, Binding.bindPort(hostPort));
-        HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount);
+
+        // Provide writable in-memory APK path for runtime since chainguard based images do not allow writes to lib/apk
+        Map<String, String> tmpFs = new HashMap<>();
+        tmpFs.put("/lib/apk", "rw,mode=1777");
+
+        HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount).withTmpFs(tmpFs);
         try (CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
             .withName(containerName)
             .withLabels(labels)
