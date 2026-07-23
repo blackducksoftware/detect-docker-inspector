@@ -50,7 +50,6 @@ public class InspectorImages {
         if (StringUtils.isBlank(inspectorImageVersion)) {
             inspectorImageVersion = programVersion.getInspectorImageVersion();
         }
-        inspectorImageMap.put(ImageInspectorOsEnum.CENTOS, new InspectorImage(ImageInspectorOsEnum.CENTOS, String.format("%s%s-centos", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         inspectorImageMap.put(ImageInspectorOsEnum.UBUNTU, new InspectorImage(ImageInspectorOsEnum.UBUNTU, String.format("%s%s-ubuntu", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
         inspectorImageMap.put(ImageInspectorOsEnum.ALPINE, new InspectorImage(ImageInspectorOsEnum.ALPINE, String.format("%s%s-alpine", repoWithSeparator, inspectorImageFamily), inspectorImageVersion));
     }

@@ -209,9 +209,6 @@ public class Config {
     @Value("${imageinspector.service.container.port.alpine:8080}")
     private String imageInspectorContainerPortAlpine = "8080";
 
-    @ValueDescription(description = "centos image inspector container port", defaultValue = "8081", group = Config.GROUP_PRIVATE, deprecated = false)
-    @Value("${imageinspector.service.container.port.centos:8081}")
-    private String imageInspectorContainerPortCentos = "8081";
 
     @ValueDescription(description = "ubuntu image inspector container port", defaultValue = "8082", group = Config.GROUP_PRIVATE, deprecated = false)
     @Value("${imageinspector.service.container.port.ubuntu:8082}")
@@ -221,16 +218,13 @@ public class Config {
     @Value("${imageinspector.service.port.alpine:9000}")
     private String imageInspectorHostPortAlpine = "9000";
 
-    @ValueDescription(description = "centos image inspector host port", defaultValue = "9001", group = Config.GROUP_PUBLIC, deprecated = false)
-    @Value("${imageinspector.service.port.centos:9001}")
-    private String imageInspectorHostPortCentos = "9001";
 
     @ValueDescription(description = "ubuntu image inspector host port", defaultValue = "9002", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.port.ubuntu:9002}")
     private String imageInspectorHostPortUbuntu = "9002";
 
     // In "start containers" mode, default is specified by distro; in "use existing", it's specified by URL
-    @ValueDescription(description = "Default image inspector Linux distro (alpine, centos, or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
+    @ValueDescription(description = "Default image inspector Linux distro (alpine or ubuntu)", defaultValue = "ubuntu", group = Config.GROUP_PUBLIC, deprecated = false)
     @Value("${imageinspector.service.distro.default:ubuntu}")
     private String imageInspectorDefaultDistro = INSPECTOR_OS_UBUNTU;
 
@@ -447,9 +441,6 @@ public class Config {
         return new Integer(optionsByFieldName.get("imageInspectorContainerPortAlpine").getResolvedValue());
     }
 
-    public Integer getImageInspectorContainerPortCentos() {
-        return new Integer(optionsByFieldName.get("imageInspectorContainerPortCentos").getResolvedValue());
-    }
 
     public Integer getImageInspectorContainerPortUbuntu() {
         return new Integer(optionsByFieldName.get("imageInspectorContainerPortUbuntu").getResolvedValue());
@@ -459,9 +450,6 @@ public class Config {
         return new Integer(optionsByFieldName.get("imageInspectorHostPortAlpine").getResolvedValue());
     }
 
-    public Integer getImageInspectorHostPortCentos() {
-        return new Integer(optionsByFieldName.get("imageInspectorHostPortCentos").getResolvedValue());
-    }
 
     public Integer getImageInspectorHostPortUbuntu() {
         return new Integer(optionsByFieldName.get("imageInspectorHostPortUbuntu").getResolvedValue());
@@ -585,10 +573,8 @@ public class Config {
         this.imageInspectorUrl = null;
         this.imageInspectorServiceStart = null;
         this.imageInspectorContainerPortAlpine = null;
-        this.imageInspectorContainerPortCentos = null;
         this.imageInspectorContainerPortUbuntu = null;
         this.imageInspectorHostPortAlpine = null;
-        this.imageInspectorHostPortCentos = null;
         this.imageInspectorHostPortUbuntu = null;
         this.imageInspectorDefaultDistro = null;
         this.helpOutputFilePath = null;

@@ -99,6 +99,16 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
             throw new IntegrationException(String.format("getBdio request returned status: %d: %s", response.getStatusCode(), response.getBody()));
         }
         String correctImageInspectorOsName = response.getBody().trim();
+
+        // Safety net: CentOS-based inspection is no longer supported
+        if ("CENTOS".equalsIgnoreCase(correctImageInspectorOsName)) {
+            logger.warn("This image requires CentOS-based (rpm) inspection, which is no longer supported. " +
+                "rpm-based images (CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, etc.) are treated as unsupported. " +
+                "Upgrade the imageinspector service to a version that handles rpm-based images gracefully.");
+            throw new IntegrationException("CentOS-based image inspection is no longer supported. " +
+                "Please upgrade the imageinspector service.");
+        }
+
         logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
         logger.info("(Image inspection may complete faster if you align the value of property imageinspector.service.distro.default with the images you inspect most frequently)");
 
@@ -254,7 +264,7 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         String containerId = dockerClientManager.startContainerAsService(imageInspectorRepo, imageInspectorTag, containerName, inspectorOs, containerPort, hostPort,
             Config.IMAGEINSPECTOR_WS_APPNAME,
             String.format("%s/%s/%s.jar", Config.CONTAINER_BLACKDUCK_DIR, Config.IMAGEINSPECTOR_WS_APPNAME, Config.IMAGEINSPECTOR_WS_APPNAME),
-            deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(), deriveInspectorBaseUri(config.getImageInspectorHostPortCentos()).toString(),
+            deriveInspectorBaseUri(config.getImageInspectorHostPortAlpine()).toString(),
             deriveInspectorBaseUri(config.getImageInspectorHostPortUbuntu()).toString());
         ContainerDetails containerDetails = new ContainerDetails(imageId.orElse(null), containerId);
         serviceIsUp = imageInspectorServices.startService(httpClient, imageInspectorUri, imageInspectorRepo, imageInspectorTag);

@@ -34,9 +34,6 @@ public class ImageInspectorServices {
         if (ImageInspectorOsEnum.ALPINE.equals(imageInspectorOs)) {
             return config.getImageInspectorHostPortAlpine();
         }
-        if (ImageInspectorOsEnum.CENTOS.equals(imageInspectorOs)) {
-            return config.getImageInspectorHostPortCentos();
-        }
         if (ImageInspectorOsEnum.UBUNTU.equals(imageInspectorOs)) {
             return config.getImageInspectorHostPortUbuntu();
         }
@@ -46,9 +43,6 @@ public class ImageInspectorServices {
     public int getImageInspectorContainerPort(ImageInspectorOsEnum imageInspectorOs) throws IntegrationException {
         if (ImageInspectorOsEnum.ALPINE.equals(imageInspectorOs)) {
             return config.getImageInspectorContainerPortAlpine();
-        }
-        if (ImageInspectorOsEnum.CENTOS.equals(imageInspectorOs)) {
-            return config.getImageInspectorContainerPortCentos();
         }
         if (ImageInspectorOsEnum.UBUNTU.equals(imageInspectorOs)) {
             return config.getImageInspectorContainerPortUbuntu();
@@ -61,13 +55,10 @@ public class ImageInspectorServices {
         if ("alpine".equalsIgnoreCase(inspectorOsName)) {
             return config.getImageInspectorHostPortAlpine();
         }
-        if ("centos".equalsIgnoreCase(inspectorOsName)) {
-            return config.getImageInspectorHostPortCentos();
-        }
         if ("ubuntu".equalsIgnoreCase(inspectorOsName)) {
             return config.getImageInspectorHostPortUbuntu();
         }
-        throw new IntegrationException(String.format("Invalid value for property image.inspector.default: %s", inspectorOsName));
+        throw new IntegrationException(String.format("Invalid value for property imageinspector.service.distro.default: %s (valid values: alpine, ubuntu)", inspectorOsName));
     }
 
     public boolean startService(IntHttpClient httpClient, URI imageInspectorUri, String imageInspectorRepo, String imageInspectorTag) throws InterruptedException {
