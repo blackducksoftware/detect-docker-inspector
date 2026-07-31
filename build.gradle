@@ -40,6 +40,8 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.blackduck.integration.solution'
 
+ext['jackson-bom.version'] = '2.22.1'
+
 final def externalRepoHost = "https://repo.blackduck.com"
 final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
 
