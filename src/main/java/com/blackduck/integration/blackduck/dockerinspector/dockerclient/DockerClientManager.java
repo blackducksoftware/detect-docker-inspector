@@ -74,6 +74,7 @@ import com.blackduck.integration.util.OperatingSystemType;
 public class DockerClientManager {
     private static final String CONTAINER_APPNAME_LABEL_KEY = "app";
     private static final String CONTAINER_OS_LABEL_KEY = "os";
+    private static final String TMP_FS_RW_MODE = "rw,mode=1777";
     private final Logger logger = LoggerFactory.getLogger(DockerClientManager.class);
     private final FileOperations fileOperations;
     private final ImageNameResolver imageNameResolver;
@@ -236,9 +237,15 @@ public class DockerClientManager {
         Ports portBindings = new Ports();
         portBindings.bind(exposedPort, Binding.bindPort(hostPort));
 
-        // Provide writable in-memory APK path for runtime since chainguard based images do not allow writes to lib/apk
+        // Provide writable in-memory package-manager paths for runtimes on hardened/read-only base images.
         Map<String, String> tmpFs = new HashMap<>();
-        tmpFs.put("/lib/apk", "rw,mode=1777");
+        if (inspectorOs == ImageInspectorOsEnum.ALPINE) {
+            tmpFs.put("/lib/apk", TMP_FS_RW_MODE);
+        } else if (inspectorOs == ImageInspectorOsEnum.UBUNTU) {
+            tmpFs.put("/var/lib/dpkg", TMP_FS_RW_MODE);
+            tmpFs.put("/var/cache/apt", TMP_FS_RW_MODE);
+            tmpFs.put("/var/cache/debconf", TMP_FS_RW_MODE);
+        }
 
         HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(portBindings).withBinds(bindMount).withTmpFs(tmpFs);
         try (CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageNameTag)
