@@ -31,9 +31,9 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "6.3.0"
+project.ext.inspectorImageVersion = "7.1.0"
 
-version = '11.6.0'
+version = '11.6.0-SIGQA1'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
