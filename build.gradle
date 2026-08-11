@@ -196,8 +196,6 @@ task pullSaveInspectorImages() {
         exec { commandLine 'mkdir', '-p', "${airGapFolder}" }
         exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
         exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-ubuntu.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-ubuntu:${project.ext.inspectorImageVersion}" }
-        exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
-        exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-centos.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-centos:${project.ext.inspectorImageVersion}" }
         exec { commandLine 'docker', 'pull', "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
         exec { commandLine 'docker', 'save', '-o', "${airGapFolder}/${project.ext.inspectorImageFamily}-alpine.tar", "blackducksoftware/${project.ext.inspectorImageFamily}-alpine:${project.ext.inspectorImageVersion}" }
     }
