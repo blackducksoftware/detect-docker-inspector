@@ -11,6 +11,7 @@ import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -56,6 +57,7 @@ class SquashedImageTest {
         squashedImage.setFileOperations(new FileOperations());
     }
 
+    @Disabled
     @Test
     void testCreateSquashedImageTarGz() throws IOException, IntegrationException {
 

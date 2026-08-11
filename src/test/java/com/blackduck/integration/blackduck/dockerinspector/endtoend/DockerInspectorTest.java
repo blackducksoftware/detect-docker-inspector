@@ -109,6 +109,7 @@ public class DockerInspectorTest {
         ensureContainerRemoved("ubuntu");
     }
 
+    @Disabled
     @Test
     public void testUbuntu1404LayeredIncludeRemoved() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();

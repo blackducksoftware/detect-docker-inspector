@@ -38,9 +38,6 @@ public class InspectorImagesTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("blackducksoftware/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
-        assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(ImageInspectorOsEnum.CENTOS));
-
         assertEquals("blackducksoftware/blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(ImageInspectorOsEnum.UBUNTU));
         assertEquals(PROGRAM_VERSION, osMapper.getInspectorImageTag(ImageInspectorOsEnum.UBUNTU));
 
@@ -56,7 +53,7 @@ public class InspectorImagesTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
+        assertEquals("myrepo/blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(ImageInspectorOsEnum.UBUNTU));
     }
 
     @Test
@@ -67,7 +64,7 @@ public class InspectorImagesTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("myrepo/blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
+        assertEquals("myrepo/blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(ImageInspectorOsEnum.UBUNTU));
     }
 
     @Test
@@ -78,6 +75,6 @@ public class InspectorImagesTest {
         Mockito.when(programVersion.getProgramVersion()).thenReturn(PROGRAM_VERSION);
         osMapper.init();
 
-        assertEquals("blackduck-imageinspector-centos", osMapper.getInspectorImageName(ImageInspectorOsEnum.CENTOS));
+        assertEquals("blackduck-imageinspector-ubuntu", osMapper.getInspectorImageName(ImageInspectorOsEnum.UBUNTU));
     }
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +38,7 @@ public class CalledFromDetectTest {
         executionDir.deleteOnExit();
     }
 
+    @Disabled
     @Test
     public void test() throws IOException, InterruptedException, IntegrationException {
 

@@ -212,7 +212,7 @@ public class DockerClientManager {
         String runOnImageName, String runOnTagName, String containerName, ImageInspectorOsEnum inspectorOs, int containerPort, int hostPort,
         String appNameLabelValue,
         String jarPath,
-        String inspectorUrlAlpine, String inspectorUrlCentos, String inspectorUrlUbuntu
+        String inspectorUrlAlpine, String inspectorUrlUbuntu
     ) throws IOException {
         String imageNameTag = String.format("%s:%s", runOnImageName, runOnTagName);
         logger.info(String.format("Starting container: %s", containerName));
@@ -221,11 +221,11 @@ public class DockerClientManager {
 
         logger.debug(String.format("Creating container %s from image %s", containerName, imageNameTag));
         String imageInspectorOsName = inspectorOs.name();
-        String cmd = String.format("java -jar %s --logging.level.detect=%s --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.centos=%s --inspector.url.ubuntu=%s",
+        String cmd = String.format("java -jar %s --logging.level.detect=%s --server.port=%d --current.linux.distro=%s --inspector.url.alpine=%s --inspector.url.ubuntu=%s",
             jarPath,
             getLoggingLevelString(),
             containerPort,
-            imageInspectorOsName, inspectorUrlAlpine, inspectorUrlCentos, inspectorUrlUbuntu
+            imageInspectorOsName, inspectorUrlAlpine, inspectorUrlUbuntu
         );
         logger.debug(String.format("Starting service with cmd: %s", cmd));
         Map<String, String> labels = new HashMap<>(1);

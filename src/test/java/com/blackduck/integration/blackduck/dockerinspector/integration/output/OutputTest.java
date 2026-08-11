@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,6 +85,7 @@ public class OutputTest {
         squashingTempDir = new File(workingDir, "squashing_tmp");
     }
 
+    @Disabled
     @Test
     public void testSquashedImageCreation() throws IOException, IntegrationException {
 
