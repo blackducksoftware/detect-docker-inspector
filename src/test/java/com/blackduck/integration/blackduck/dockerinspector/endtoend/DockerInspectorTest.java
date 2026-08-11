@@ -29,8 +29,6 @@ import com.blackduck.integration.exception.IntegrationException;
 public class DockerInspectorTest {
     private static final int IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE = 8080;
     private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE = 8080;
-    private static final int IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS = 8081;
-    private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS = 8081;
     private static final int IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU = 8082;
     private static final int IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU = 8082;
 
@@ -57,28 +55,23 @@ public class DockerInspectorTest {
         removeDockerInspectorContainers();
         System.out.printf("All containers:\n%s\n", getAllContainers(false));
         startContainer("alpine", IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE, IMAGE_INSPECTOR_PORT_IN_CONTAINER_ALPINE);
-        startContainer("centos", IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS, IMAGE_INSPECTOR_PORT_IN_CONTAINER_CENTOS);
         startContainer("ubuntu", IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU, IMAGE_INSPECTOR_PORT_IN_CONTAINER_UBUNTU);
 
         boolean alpineUp = false;
-        boolean centosUp = false;
         boolean ubuntuUp = false;
         for (int i = 0; i < 10; i++) {
             Thread.sleep(10000L);
             if (!alpineUp) {
                 alpineUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_ALPINE);
             }
-            if (!centosUp) {
-                centosUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS);
-            }
             if (!ubuntuUp) {
                 ubuntuUp = isUp(IMAGE_INSPECTOR_PORT_ON_HOST_UBUNTU);
             }
-            if (alpineUp && centosUp && ubuntuUp) {
+            if (alpineUp && ubuntuUp) {
                 break;
             }
         }
-        assertTrue(alpineUp && centosUp && ubuntuUp);
+        assertTrue(alpineUp && ubuntuUp);
 
         File testDir = new File(TestUtils.TEST_DIR_REL_PATH);
         dirSharedWithContainer = new File(testDir, "containerShared");
@@ -107,15 +100,12 @@ public class DockerInspectorTest {
 
     private static void cleanUpContainers() throws InterruptedException {
         stopContainer("alpine");
-        stopContainer("centos");
         stopContainer("ubuntu");
         Thread.sleep(30000L);
         removeContainer("alpine");
-        removeContainer("centos");
         removeContainer("ubuntu");
         Thread.sleep(10000L);
         ensureContainerRemoved("alpine");
-        ensureContainerRemoved("centos");
         ensureContainerRemoved("ubuntu");
     }
 
@@ -164,21 +154,6 @@ public class DockerInspectorTest {
             .setOutputBomMustContainComponentPrefix("apk-")
             .setMinNumberOfComponentsExpected(5)
             .setCodelocationName("alpine_3.6_APK")
-            .build();
-        integrationTestRunner.testImage(testConfig);
-    }
-
-    @Test
-    public void testCentosStartContainer() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = (new TestConfigBuilder())
-            .setInspectTargetImageRepoTag("centos:7.3.1611")
-            .setTargetRepo("centos")
-            .setTargetTag("7.3.1611")
-            .setRequireBdioMatch(false)
-            .setMode(TestConfig.Mode.SPECIFY_II_DETAILS)
-            .setOutputBomMustContainComponentPrefix("openssl-libs")
-            .setMinNumberOfComponentsExpected(15)
-            .setCodelocationName("centos_7.3.1611_RPM")
             .build();
         integrationTestRunner.testImage(testConfig);
     }
@@ -265,114 +240,6 @@ public class DockerInspectorTest {
     }
 
     @Test
-    public void testRhel() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = (new TestConfigBuilder())
-            .setInspectTargetImageRepoTag("dnplus/rhel:6.5")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("rpm")
-            .setCodelocationName("dnplus_rhel_6.5_RPM")
-            .build();
-
-        testImageUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testFedoraLatest() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = (new TestConfigBuilder())
-            .setInspectTargetImageRepoTag("fedora:latest")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("fedora-")
-            .setOutputBomMustContainExternalSystemTypeId("@fedora")
-            .setCodelocationName("fedora_latest_RPM")
-            .build();
-
-        testImageUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testOpenSuseForge() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = (new TestConfigBuilder())
-            .setInspectTargetImageRepoTag("opensuse/portus:2.4")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainExternalSystemTypeId("@opensuse")
-            .setCodelocationName("opensuse_portus_2.4_RPM")
-            .build();
-
-        testImageUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testNonLinux() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("src/test/resources/osless.tar")
-            .setTargetRepo("osless")
-            .setTargetTag("1.0")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(true)
-            .setCodelocationName("osless_1.0_noPkgMgr")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testWhiteout() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/whiteouttest.tar")
-            .setTargetRepo("blackducksoftware/whiteouttest")
-            .setTargetTag("1.0")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("libc-bin")
-            .setOutputBomMustNotContainComponentPrefix("curl")
-            .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testAggregateTarfileImageOne() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/aggregated.tar")
-            .setTargetRepo("blackducksoftware/whiteouttest")
-            .setTargetTag("1.0")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("libc-bin")
-            .setOutputBomMustNotContainComponentPrefix("curl")
-            .setCodelocationName("blackducksoftware_whiteouttest_1.0_DPKG")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
-
-    @Test
-    public void testAggregateTarfileImageTwo() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/aggregated.tar")
-            .setTargetRepo("blackducksoftware/centos_minus_vim_plus_bacula")
-            .setTargetTag("1.0")
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setMinNumberOfComponentsExpected(10)
-            .setOutputBomMustContainComponentPrefix("openssl-libs")
-            .setOutputBomMustNotContainComponentPrefix("vim-minimal")
-            .setCodelocationName("blackducksoftware_centos_minus_vim_plus_bacula_1.0_RPM")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
-
-    @Test
     public void testAlpineLatestTarRepoTagSpecified() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
             .setTarFilePath("build/images/test/alpine.tar")
@@ -434,6 +301,7 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
+    @Disabled("RPM inspection removed in hub-imageinspector-lib 16.0.0")
     @Test
     public void testCentosUsingExistingAlpineContainer() throws IOException, InterruptedException, IntegrationException {
         TestConfig testConfig = new TestConfigBuilder()
@@ -467,22 +335,7 @@ public class DockerInspectorTest {
         testTarUsingExistingContainer(testConfig);
     }
 
-    @Test
-    public void testUbuntuUsingExistingCentosContainer() throws IOException, InterruptedException, IntegrationException {
-        TestConfig testConfig = new TestConfigBuilder()
-            .setTarFilePath("build/images/test/ubuntu1404.tar")
-            .setTargetRepo(null)
-            .setTargetTag(null)
-            .setPortOnHost(IMAGE_INSPECTOR_PORT_ON_HOST_CENTOS)
-            .setRequireBdioMatch(false)
-            .setOutputBomMustContainComponentPrefix("iputils-ping")
-            .setMinNumberOfComponentsExpected(10)
-            .setCodelocationName("null_null_DPKG")
-            .build();
-
-        testTarUsingExistingContainer(testConfig);
-    }
-
+    @Disabled("RPM inspection removed in hub-imageinspector-lib 16.0.0")
     @Test
     public void testExcludePlatformComponents() throws IOException, InterruptedException, IntegrationException {
         List<String> additionalArgs = new ArrayList<>();
@@ -753,7 +606,7 @@ public class DockerInspectorTest {
             String[] fields = line.split("\\s+");
             String containerName = fields[fields.length - 1];
             System.out.printf("Container name: %s\n", containerName);
-            if (containerName.startsWith("blackduck-imageinspector-alpine_") || containerName.startsWith("blackduck-imageinspector-centos_") || containerName.startsWith("blackduck-imageinspector-ubuntu_")) {
+            if (containerName.startsWith("blackduck-imageinspector-alpine_") || containerName.startsWith("blackduck-imageinspector-ubuntu_")) {
                 TestUtils.execCmd(String.format("docker stop %s", containerName), 120000L, false, null);
                 Thread.sleep(10000L);
                 TestUtils.execCmd(String.format("docker rm -f %s", containerName), 120000L, false, null);
