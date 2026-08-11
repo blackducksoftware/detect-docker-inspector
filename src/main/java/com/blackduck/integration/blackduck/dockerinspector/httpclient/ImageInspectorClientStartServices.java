@@ -106,10 +106,8 @@ public class ImageInspectorClientStartServices extends ImageInspectorClient {
         // Safety net: CentOS-based inspection is no longer supported
         if ("CENTOS".equalsIgnoreCase(correctImageInspectorOsName)) {
             logger.warn("This image requires CentOS-based (rpm) inspection, which is no longer supported. " +
-                "rpm-based images (CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, etc.) are treated as unsupported. " +
-                "Upgrade the imageinspector service to a version that handles rpm-based images gracefully.");
-            throw new IntegrationException("CentOS-based image inspection is no longer supported. " +
-                "Please upgrade the imageinspector service.");
+                "rpm-based images (CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, etc.) are treated as unsupported. ");
+            throw new IntegrationException("CentOS-based image inspection is no longer supported. ");
         }
 
         logger.info(String.format("This image needs to be inspected on %s", correctImageInspectorOsName));
