@@ -22,7 +22,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath 'com.bmuschko:gradle-docker-plugin:6.7.0'
-        classpath 'org.freemarker:freemarker:2.3.31'
+        classpath 'org.freemarker:freemarker:2.3.35'
     }
 }
 plugins {
@@ -388,7 +388,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.yaml:snakeyaml:2.0'
-    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.35'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.fabric8:kubernetes-client:3.2.0'
