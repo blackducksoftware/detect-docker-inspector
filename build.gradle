@@ -22,7 +22,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath 'com.bmuschko:gradle-docker-plugin:6.7.0'
-        classpath 'org.freemarker:freemarker:2.3.31'
+        classpath 'org.freemarker:freemarker:2.3.35'
     }
 }
 plugins {
