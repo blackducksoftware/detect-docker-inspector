@@ -2,7 +2,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 buildscript {
     ext {
-        springBootVersion = '2.7.12'
+        springBootVersion = '2.7.18'
         dockerJavaVersion = '3.2.13-blackduck.1'
         junitPlatformCustomTestTags = 'docker, battery'
         javaTargetCompatibility = 8
@@ -31,7 +31,7 @@ plugins {
 }
 
 project.ext.inspectorImageFamily = "blackduck-imageinspector"
-project.ext.inspectorImageVersion = "7.1.1"
+project.ext.inspectorImageVersion = "7.1.2"
 
 version = '12.0.2-SNAPSHOT'
 
@@ -40,7 +40,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.blackduck.integration.solution'
 
-ext['jackson-bom.version'] = '2.22.1'
+ext['jackson-bom.version'] = '2.22.3'
 
 final def externalRepoHost = "https://repo.blackduck.com"
 final def internalRepoHost = System.getenv('SNPS_INTERNAL_ARTIFACTORY')
@@ -99,8 +99,8 @@ configurations {
         // Bouncy Castle: docker-java pulls jdk15on:1.64, but from 1.71+ BC only publishes under jdk18on.
         // Use dependencySubstitution to swap artifact ID AND version in one step.
         resolutionStrategy.dependencySubstitution {
-            substitute module('org.bouncycastle:bcpkix-jdk15on') using module('org.bouncycastle:bcpkix-jdk18on:1.84')
-            substitute module('org.bouncycastle:bcprov-jdk15on') using module('org.bouncycastle:bcprov-jdk18on:1.84')
+            substitute module('org.bouncycastle:bcpkix-jdk15on') using module('org.bouncycastle:bcpkix-jdk18on:1.86')
+            substitute module('org.bouncycastle:bcprov-jdk15on') using module('org.bouncycastle:bcprov-jdk18on:1.86')
         }
     }
 }
@@ -377,11 +377,11 @@ dependencies {
         }
     }
 
-    implementation("org.springframework:spring-core:5.3.34")
-    implementation "org.springframework:spring-aop:5.3.34"
-    implementation "org.springframework:spring-beans:5.3.34"
-    implementation "org.springframework:spring-expression:5.3.34"
-    implementation("org.springframework:spring-context:5.3.34")
+    implementation("org.springframework:spring-core:5.3.39")
+    implementation "org.springframework:spring-aop:5.3.39"
+    implementation "org.springframework:spring-beans:5.3.39"
+    implementation "org.springframework:spring-expression:5.3.39"
+    implementation("org.springframework:spring-context:5.3.39")
 
     implementation "com.github.docker-java:docker-java-core:${dockerJavaVersion}"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:${dockerJavaVersion}"
